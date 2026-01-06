@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила сервера TimeLand</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #f4d03f;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background: rgba(212, 175, 55, 0.2);
+            color: #f4d03f;
+            text-decoration: none;
+            border-radius: 20px;
+            border: 1px solid #d4af37;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(201, 160, 68, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #f4d03f;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #c9a044;
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        /* Rules Sections */
+        .rules-section {
+            margin-bottom: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #f4d03f;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c9a044 0%, #d4af37 100%);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Rules List */
+        .rule-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #d4af37;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-item:hover {
+            transform: translateX(5px);
+            border-left-color: #f4d03f;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .rule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .rule-number {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-width: 40px;
+        }
+
+        .rule-text {
+            flex: 1;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            margin-left: 15px;
+        }
+
+        .punishment {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(233, 30, 99, 0.2) 100%);
+            color: #f4d03f;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 15px;
+            white-space: nowrap;
+            display: inline-block;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .exception {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(139, 195, 74, 0.2) 100%);
+            color: #8BC34A;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            display: inline-block;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .note {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(100, 181, 246, 0.2) 100%);
+            color: #64B5F6;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            display: inline-block;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sub-rules */
+        .sub-rules {
+            margin-top: 15px;
+            margin-left: 55px;
+        }
+
+        .sub-rule {
+            color: #c9a044;
+            font-family: Arial, sans-serif;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .disclaimer h3 {
+            color: #f4d03f;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .disclaimer p {
+            color: #c9a044;
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .rules-section {
+                padding: 25px;
+            }
+
+            .rule-header {
+                flex-direction: column;
+            }
+
+            .punishment {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .sub-rules {
+                margin-left: 20px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">TimeLand</a>
+                <a href="index.html" class="back-button">← На главную</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Правила сервера</h1>
+            <p>Пожалуйста, внимательно ознакомьтесь с правилами перед началом игры на сервере. Соблюдение правил обеспечивает комфортную игру для всех участников.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Game and Discord Chat -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Игровой и дискорд чат
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.1</span>
+                        <div class="rule-text">Запрещено оскорбление игроков, администрации, а также родственников их всех.</div>
+                    </div>
+                    <span class="punishment">Мут от 60 минут до 3 часов</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.2</span>
+                        <div class="rule-text">Запрещено спамить/флудить</div>
+                    </div>
+                    <span class="punishment">Мут от 10 минут до 30 минут</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.3</span>
+                        <div class="rule-text">Запрещено угрожать кому то баном или мутом без причины.</div>
+                    </div>
+                    <span class="punishment">Мут 30 минут</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.4</span>
+                        <div class="rule-text">Запрещено выдавать себя за участника администрации.</div>
+                    </div>
+                    <span class="punishment">Мут 2 часа</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.5</span>
+                        <div class="rule-text">Разрешено само оскорбление.</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.6</span>
+                        <div class="rule-text">Личный, личный дискорд, голосовой чат не модерируются.</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.7</span>
+                        <div class="rule-text">Запрещено воспроизводить резкие и не приятные звуки (Орать в микрофон и т.п)</div>
+                    </div>
+                    <span class="punishment">Мут от 10 минут до 30 минут</span>
+                </div>
+
+                <div class="sub-rules">
+                    <div class="sub-rule">1.7.1 Запрещено использование войс мода. <span class="punishment">Мут от 25 минут до 45 минут</span></div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">1.8</span>
+                        <div class="rule-text">Запрещена реклама других серверов в профиле</div>
+                    </div>
+                    <span class="punishment">Бан из Discord</span>
+                </div>
+            </div>
+
+            <!-- General Issues -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Общие вопросы
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">2.1</span>
+                        <div class="rule-text">Запрещена кража ресурсов (Кроме взятия в долг).</div>
+                    </div>
+                    <span class="punishment">Бан от 1 дня до 3 дней</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">2.2</span>
+                        <div class="rule-text">Запрещено просто так убивать игроков (Во время афк, без причины и всё тому подобное).</div>
+                    </div>
+                    <span class="punishment">Бан 1 день</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">2.3</span>
+                        <div class="rule-text">Запрещено таргетить или охотится на игроков.</div>
+                    </div>
+                    <span class="punishment">Бан 1 день</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">2.4</span>
+                        <div class="rule-text">Запрещено строить пенисы и т.д</div>
+                    </div>
+                    <span class="punishment">Бан 3 дня</span>
+                </div>
+            </div>
+
+            <!-- Gameplay -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Игровой процесс
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">3.1</span>
+                        <div class="rule-text">Запрещено использование/хранение читов/программ которые сильно упрощают игровой процесс. <span class="note">В зависимости от чита, и от урона который он принёс</span></div>
+                    </div>
+                    <div class="sub-rules">
+                        <div class="sub-rule"><strong>Список читов/программ:</strong> X-Ray, всё что начинается с Auto (Auto Aim и т.д), Baritone и всё т.п.</div>
+                        <div class="sub-rule"><strong>Исключения:</strong> Full Bright (Gamma) и Freecam</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">3.2</span>
+                        <div class="rule-text">Запрещено нарушать работу администрации</div>
+                    </div>
+                    <span class="punishment">Бан 1 день</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">3.3</span>
+                        <div class="rule-text">Запрещено строить лаг машины.</div>
+                    </div>
+                    <span class="punishment">Бан до 1 сезона</span>
+                </div>
+
+                <div class="sub-rules">
+                    <div class="sub-rule">3.3.1 Запрещено строить механизмы которые будут мешать работе сервера. <span class="punishment">Бан до 1 сезона</span></div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">3.4</span>
+                        <div class="rule-text">Запрещено использовать баги сервера/майнкрафта.</div>
+                    </div>
+                    <span class="punishment">Бан до 8 дней</span>
+                </div>
+            </div>
+
+            <!-- Economy -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Экономика
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">4.1</span>
+                        <div class="rule-text">Главный экономический ресурс (Валюта) определяется самими игроками, также их может быть несколько.</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">4.2</span>
+                        <div class="rule-text">Запрещён обман игроков на ресурсы или на эконом. ресурс.</div>
+                    </div>
+                    <span class="punishment">Бан от 1 дня до 4 дней</span>
+                </div>
+            </div>
+
+            <!-- Lore and Story -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">5</span>
+                    Лор и сюжет
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">5.1</span>
+                        <div class="rule-text">Запрещено разрушать/ломать лорные постройки</div>
+                    </div>
+                    <span class="punishment">Бан от 1 дня до 1 недели</span>
+                    <span class="exception">Исключение: Разрешено лутать лорные постройки, и убивать мобов</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">5.2</span>
+                        <div class="rule-text">Запрещено подбирать вещи сценаристов</div>
+                    </div>
+                    <span class="punishment">Бан 2 дня</span>
+                    <span class="note">Уточнение: Если сценарист подкидывает записку, то можно, если ком. блоки то нельзя</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">5.3</span>
+                        <div class="rule-text">Не мешать проведению лора</div>
+                    </div>
+                    <span class="punishment">Бан 3 дня</span>
+                    <div class="sub-rules">
+                        <div class="sub-rule">Примеры: Не подходить близко к строящимся лорным постройкам, При виде создания лорной постройки/локации, не мешать её созданию</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">5.4</span>
+                        <div class="rule-text">Запрещено вымогать информацию у сценаристов (Спойлеры и т.д)</div>
+                    </div>
+                    <span class="punishment">Мут от 30 до 45 минут</span>
+                </div>
+            </div>
+
+            <!-- Clans and Community -->
+            <div class="rules-section fade-in">
+                <h2 class="section-title">
+                    <span class="section-number">6</span>
+                    Кланы и комьюнити
+                </h2>
+                
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">6.1</span>
+                        <div class="rule-text">Запрещено создавать кланы с названиями которые затрагивают политические темы</div>
+                    </div>
+                    <span class="punishment">Удаление клана, частичный лут территорий</span>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">6.2</span>
+                        <div class="rule-text">Запрещено проводить набеги/войны на другие кланы</div>
+                    </div>
+                    <span class="punishment">Бан лидера и заместителя от 2 до 6 дней</span>
+                    <span class="exception">Исключение: Если желание клановой войны идёт со стороны обоих кланов, и они согласны её провести, то им выделяется отдельная зона для проведения войны. Исходы: Клан может поглотить другой клан, клан может взять какие то ресурсы у побеждённого клана</span>
+                </div>
+
+                <div class="sub-rules">
+                    <div class="sub-rule">6.2.1 В случае если одна из сторон АФК, то война отменяется</div>
+                    <div class="sub-rule">6.2.2 Игрокам разрешено ставить ставки на войны, а также приходить и смотреть их</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">6.3</span>
+                        <div class="rule-text">Для создания клана требуется как минимум 2 игрока.</div>
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-header">
+                        <span class="rule-number">6.4</span>
+                        <div class="rule-text">Запрещено добывать ресы с территорий чужих кланов.</div>
+                    </div>
+                    <span class="punishment">Бан 1 день</span>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer fade-in">
+                <h3>Важное примечание</h3>
+                <p>Правила могут меняться. Администрация оставляет за собой право на изменение наказаний в зависимости от обстоятельств и тяжести нарушения.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2024 TimeLand. Все права защищены.</p>
+            <p style="color: #c9a044; font-family: Arial, sans-serif; margin-top: 10px; font-size: 0.9rem;">Соблюдайте правила и получайте удовольствие от игры!</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scroll behavior for rule links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
