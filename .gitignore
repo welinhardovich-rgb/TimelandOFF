@@ -1,0 +1,39 @@
+# IDE и редакторы кода
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Операционные системы
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Логи
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Зависимости (если используются)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Временные файлы
+*.tmp
+*.temp
+
+# Кэш браузера и временные файлы
+.cache/
+.temp/
+
+# Резервные копии
+*.bak
+*.backup
