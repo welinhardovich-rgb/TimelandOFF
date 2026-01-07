@@ -13,10 +13,20 @@
 
         body {
             font-family: 'Arial Black', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            background: linear-gradient(45deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: backgroundShift 8s ease-in-out infinite;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
         }
 
         .container {
@@ -610,7 +620,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2024 TimeLand. Все права защищены.</p>
+            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2025-2026 TimeLand. Все права защищены.</p>
             <p style="color: #c9a044; font-family: Arial, sans-serif; margin-top: 10px; font-size: 0.9rem;">Соблюдайте правила и получайте удовольствие от игры!</p>
         </div>
     </footer>

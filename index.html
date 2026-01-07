@@ -13,10 +13,58 @@
 
         body {
             font-family: 'Arial Black', Arial, sans-serif;
-            background: linear-gradient(135deg, #2d1810 0%, #1a0e08 50%, #2d1810 100%);
+            background: linear-gradient(45deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: backgroundShift 8s ease-in-out infinite;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Dust particles effect */
+        .dust-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .dust-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.8) 0%, rgba(218, 165, 32, 0.3) 50%, transparent 100%);
+            border-radius: 50%;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Top Navigation */
@@ -25,12 +73,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(45, 24, 16, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(218, 165, 32, 0.3);
+            border-bottom: 2px solid rgba(218, 165, 32, 0.5);
             padding: 15px 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
         }
 
         .top-nav .container {
@@ -48,13 +96,13 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 20px rgba(218, 165, 32, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8);
             transition: all 0.3s ease;
         }
 
         .logo:hover {
             color: #ffd700;
-            text-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
+            text-shadow: 0 0 25px rgba(218, 165, 32, 1), 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .nav-links {
@@ -74,8 +122,8 @@
 
         .nav-links a:hover {
             color: #daa520;
-            background: rgba(218, 165, 32, 0.1);
-            border-color: rgba(218, 165, 32, 0.3);
+            background: rgba(218, 165, 32, 0.15);
+            border-color: rgba(218, 165, 32, 0.4);
             transform: translateY(-2px);
         }
 
@@ -83,6 +131,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Hero Section */
@@ -93,57 +143,45 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(218, 165, 32, 0.08) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(218, 165, 32, 0.05) 0%, transparent 70%);
             padding-top: 80px;
         }
 
         .hero-content {
             animation: fadeInUp 1.2s ease-out;
-            z-index: 2;
+            z-index: 3;
             position: relative;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 5rem;
             margin-bottom: 2rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            background: linear-gradient(45deg, #daa520, #ffd700, #daa520);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            letter-spacing: 5px;
+            color: #daa520;
+            text-shadow: 0 0 30px rgba(218, 165, 32, 0.8), 3px 3px 6px rgba(0, 0, 0, 0.9);
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(218, 165, 32, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.9);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(218, 165, 32, 1), 3px 3px 6px rgba(0, 0, 0, 0.9);
+            }
         }
 
         .hero-description {
             font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            color: #daa520;
+            margin-bottom: 2rem;
+            color: #cd853f;
             font-family: Arial, sans-serif;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.7;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .server-status {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(76, 175, 80, 0.2);
-            border: 2px solid #4CAF50;
-            border-radius: 25px;
-            color: #4CAF50;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .cta-button {
@@ -196,6 +234,10 @@
         .section {
             padding: 100px 0;
             position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .section-title {
@@ -220,12 +262,12 @@
 
         /* Server Info */
         .server-info {
-            background: rgba(45, 24, 16, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 25px;
             padding: 50px;
             text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(218, 165, 32, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             max-width: 800px;
             margin: 0 auto;
@@ -242,13 +284,13 @@
             color: #ffd700;
             margin: 30px 0;
             padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 20px;
             display: inline-block;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid rgba(218, 165, 32, 0.5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .server-ip:hover {
@@ -262,67 +304,120 @@
             border-color: #4CAF50;
         }
 
-        /* Why Us Section */
-        .why-us-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .feature-card {
-            background: rgba(45, 24, 16, 0.6);
-            border-radius: 25px;
-            padding: 40px 30px;
-            text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.3);
-            transition: all 0.3s ease;
+        /* Why Us Section - Slider */
+        .why-us-slider {
             position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 25px;
+            padding: 50px;
+            border: 2px solid rgba(218, 165, 32, 0.4);
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
-        .feature-card::before {
-            content: '';
+        .slider-container {
+            position: relative;
+            height: 400px;
+        }
+
+        .slide {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .feature-card:hover::before {
+        .slide.active {
             opacity: 1;
+            transform: translateX(0);
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(218, 165, 32, 0.6);
-            box-shadow: 0 20px 50px rgba(218, 165, 32, 0.2);
+        .slide.prev {
+            transform: translateX(-100%);
         }
 
-        .feature-icon {
-            font-size: 3rem;
+        .slide-icon {
+            font-size: 4rem;
             margin-bottom: 20px;
             color: #cd853f;
         }
 
-        .feature-card h3 {
-            font-size: 1.4rem;
+        .slide h3 {
+            font-size: 1.6rem;
             color: #daa520;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        .feature-card p {
+        .slide p {
             color: #c9a044;
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(218, 165, 32, 0.3);
+            border: 2px solid #cd853f;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #daa520;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+        }
+
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .slider-arrow {
+            background: rgba(218, 165, 32, 0.2);
+            border: 2px solid #cd853f;
+            color: #daa520;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(218, 165, 32, 0.4);
+            transform: scale(1.1);
         }
 
         /* Donation Cards */
@@ -334,11 +429,11 @@
         }
 
         .donation-card {
-            background: rgba(45, 24, 16, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 25px;
             padding: 35px;
             text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(218, 165, 32, 0.4);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -364,7 +459,7 @@
 
         .donation-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(218, 165, 32, 0.6);
+            border-color: rgba(218, 165, 32, 0.7);
             box-shadow: 0 20px 50px rgba(218, 165, 32, 0.2);
         }
 
@@ -410,11 +505,11 @@
 
         /* Quick Access */
         .quick-access {
-            background: rgba(45, 24, 16, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 25px;
             padding: 50px;
             text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(218, 165, 32, 0.4);
         }
 
         .button-grid {
@@ -429,12 +524,12 @@
             align-items: center;
             justify-content: center;
             padding: 18px 30px;
-            background: rgba(45, 24, 16, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             color: #c9a044;
             text-decoration: none;
             border-radius: 20px;
             transition: all 0.3s ease;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(218, 165, 32, 0.4);
             gap: 12px;
             font-weight: bold;
         }
@@ -447,31 +542,26 @@
             color: #daa520;
         }
 
-        /* Rules Islands */
+        /* Rules Section - Inline Columns */
         .rules-preview {
-            background: rgba(45, 24, 16, 0.3);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 25px;
             padding: 50px;
             margin-top: 50px;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(218, 165, 32, 0.4);
         }
 
         .rules-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .rules-grid.bottom {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .rule-island {
-            background: rgba(45, 24, 16, 0.7);
+        .rule-item {
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 20px;
             padding: 30px 20px;
-            text-align: center;
             border: 2px solid rgba(218, 165, 32, 0.3);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -479,7 +569,7 @@
             overflow: hidden;
         }
 
-        .rule-island::before {
+        .rule-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -490,62 +580,58 @@
             transition: left 0.5s ease;
         }
 
-        .rule-island:hover::before {
+        .rule-item:hover::before {
             left: 100%;
         }
 
-        .rule-island:hover {
+        .rule-item:hover {
             transform: translateY(-5px);
             border-color: rgba(218, 165, 32, 0.6);
             box-shadow: 0 10px 25px rgba(218, 165, 32, 0.2);
         }
 
         .rule-number {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #cd853f;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .rule-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #daa520;
             text-transform: uppercase;
             font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .rules-link {
-            text-align: center;
-            margin-top: 30px;
+        .rule-description {
+            color: #c9a044;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .rules-button {
-            display: inline-block;
-            padding: 15px 35px;
-            background: transparent;
-            color: #daa520;
-            text-decoration: none;
-            border-radius: 30px;
-            border: 2px solid #daa520;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .rules-button:hover {
-            background: rgba(218, 165, 32, 0.1);
+        .rule-link {
             color: #ffd700;
-            border-color: #ffd700;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(218, 165, 32, 0.2);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .rule-link:hover {
+            color: #daa520;
+            text-shadow: 0 0 5px rgba(218, 165, 32, 0.5);
         }
 
         /* Footer */
         footer {
-            background: rgba(45, 24, 16, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             padding: 50px 0;
             text-align: center;
-            border-top: 2px solid rgba(218, 165, 32, 0.3);
+            border-top: 2px solid rgba(218, 165, 32, 0.5);
         }
 
         .footer-links {
@@ -567,8 +653,8 @@
 
         .footer-links a:hover {
             color: #daa520;
-            background: rgba(218, 165, 32, 0.1);
-            border-color: rgba(218, 165, 32, 0.3);
+            background: rgba(218, 165, 32, 0.15);
+            border-color: rgba(218, 165, 32, 0.4);
             transform: translateY(-2px);
         }
 
@@ -607,7 +693,7 @@
             }
 
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
                 letter-spacing: 2px;
             }
 
@@ -628,10 +714,6 @@
                 padding: 15px 25px;
             }
 
-            .why-us-grid {
-                grid-template-columns: 1fr;
-            }
-
             .donation-grid {
                 grid-template-columns: 1fr;
             }
@@ -641,16 +723,20 @@
                 gap: 20px;
             }
 
-            .rules-grid.bottom {
-                grid-template-columns: 1fr;
-            }
-
             .button-grid {
                 grid-template-columns: 1fr;
             }
 
             .footer-links {
                 gap: 15px;
+            }
+
+            .why-us-slider {
+                padding: 30px;
+            }
+
+            .slider-container {
+                height: 350px;
             }
         }
 
@@ -667,6 +753,9 @@
     </style>
 </head>
 <body>
+    <!-- Dust particles effect -->
+    <div class="dust-container" id="dustContainer"></div>
+
     <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="container">
@@ -685,7 +774,6 @@
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="server-status">🟢 Онлайн</div>
                 <h1>TimeLand</h1>
                 <p class="hero-description">
                     Ванильный Minecraft сервер с уникальным сюжетом и дружелюбным сообществом. 
@@ -724,45 +812,53 @@
         </div>
     </section>
 
-    <!-- Why Us Section -->
-    <section id="why-us" class="section" style="background: rgba(45, 24, 16, 0.2);">
+    <!-- Why Us Section - Slider -->
+    <section id="why-us" class="section" style="background: rgba(0, 0, 0, 0.4);">
         <div class="container">
             <h2 class="section-title fade-in">Почему именно мы?</h2>
-            <div class="why-us-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Добрая и отзывчивая администрация</h3>
-                    <p>На TimeLand всегда царит дружеская атмосфера. Команда следит за порядком, помогает игрокам и делает игру комфортной. Мы не живём на картошке, зато живём идеей — сделать лучший сервер!</p>
+            <div class="why-us-slider fade-in">
+                <div class="slider-container" id="sliderContainer">
+                    <div class="slide active">
+                        <div class="slide-icon">🤝</div>
+                        <h3>Добрая и отзывчивая администрация</h3>
+                        <p>На TimeLand всегда царит дружеская атмосфера. Команда следит за порядком, помогает игрокам и делает игру комфортной. Мы не живём на картошке, зато живём идеей — сделать лучший сервер!</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="slide-icon">📈</div>
+                        <h3>Сервер растёт и развивается</h3>
+                        <p>TimeLand активно растёт, и каждый игрок может стать частью этого. Приглашай друзей или поддержи сервер покупкой доната — помоги нам развиваться вместе!</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="slide-icon">⚡</div>
+                        <h3>Качественная сборка и уникальные моды</h3>
+                        <p>Наш сервер собран с любовью. Мы используем оптимизированные моды, чтобы обеспечить баланс, стабильность и интересную игру без лагов.</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="slide-icon">🔄</div>
+                        <h3>Постоянные обновления</h3>
+                        <p>Мы регулярно добавляем новые возможности, улучшения и ивенты, чтобы тебе всегда было интересно возвращаться в мир TimeLand!</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="slide-icon">👥</div>
+                        <h3>Дружное сообщество</h3>
+                        <p>Здесь каждый игрок важен. На сервере уже сложилось приятное сообщество, где можно найти друзей и весело провести время.</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="slide-icon">🎭</div>
+                        <h3>Уникальный сюжет и лор</h3>
+                        <p>Погрузись в увлекательную историю, созданную нашими талантливыми сценаристами. Каждая локация, каждый NPC — часть большого приключения.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="feature-icon">📈</div>
-                    <h3>Сервер растёт и развивается</h3>
-                    <p>TimeLand активно растёт, и каждый игрок может стать частью этого. Приглашай друзей или поддержи сервер покупкой доната — помоги нам развиваться вместе!</p>
-                </div>
-
-                <div class="feature-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Качественная сборка и уникальные моды</h3>
-                    <p>Наш сервер собран с любовью. Мы используем оптимизированные моды, чтобы обеспечить баланс, стабильность и интересную игру без лагов.</p>
-                </div>
-
-                <div class="feature-card fade-in" style="animation-delay: 0.3s;">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Постоянные обновления</h3>
-                    <p>Мы регулярно добавляем новые возможности, улучшения и ивенты, чтобы тебе всегда было интересно возвращаться в мир TimeLand!</p>
-                </div>
-
-                <div class="feature-card fade-in" style="animation-delay: 0.4s;">
-                    <div class="feature-icon">👥</div>
-                    <h3>Дружное сообщество</h3>
-                    <p>Здесь каждый игрок важен. На сервере уже сложилось приятное сообщество, где можно найти друзей и весело провести время.</p>
-                </div>
-
-                <div class="feature-card fade-in" style="animation-delay: 0.5s;">
-                    <div class="feature-icon">🎭</div>
-                    <h3>Уникальный сюжет и лор</h3>
-                    <p>Погрузись в увлекательную историю, созданную нашими талантливыми сценаристами. Каждая локация, каждый NPC — часть большого приключения.</p>
+                
+                <div class="slider-nav" id="sliderNav"></div>
+                <div class="slider-arrows">
+                    <div class="slider-arrow" id="prevSlide">‹</div>
+                    <div class="slider-arrow" id="nextSlide">›</div>
                 </div>
             </div>
         </div>
@@ -798,7 +894,7 @@
     </section>
 
     <!-- Quick Access Section -->
-    <section id="quick-access" class="section" style="background: rgba(45, 24, 16, 0.2);">
+    <section id="quick-access" class="section" style="background: rgba(0, 0, 0, 0.4);">
         <div class="container">
             <h2 class="section-title fade-in">Наше сообщество</h2>
             <div class="quick-access fade-in">
@@ -830,41 +926,53 @@
         </div>
     </section>
 
-    <!-- Rules Preview Section -->
+    <!-- Rules Preview Section - Inline -->
     <section id="rules" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Правила сервера</h2>
             <div class="rules-preview fade-in">
                 <div class="rules-grid">
-                    <div class="rule-island" onclick="location.href='rules.html#chat'">
+                    <div class="rule-item">
                         <div class="rule-number">1</div>
-                        <div class="rule-title">Игровой и<br>Discord чат</div>
+                        <div class="rule-title">Игровой и Discord чат</div>
+                        <div class="rule-description">Правила общения в чате и дискорде. Запрет на оскорбления, спам, угрозы и выдачу за администрацию.</div>
+                        <a href="rules.html#chat" class="rule-link">Подробнее →</a>
                     </div>
-                    <div class="rule-island" onclick="location.href='rules.html#general'">
+                    
+                    <div class="rule-item">
                         <div class="rule-number">2</div>
-                        <div class="rule-title">Общие<br>вопросы</div>
+                        <div class="rule-title">Общие вопросы</div>
+                        <div class="rule-description">Запрет на кражу ресурсов, убийства без причины, таргетинг игроков и строительство неподобающих строений.</div>
+                        <a href="rules.html#general" class="rule-link">Подробнее →</a>
                     </div>
-                    <div class="rule-island" onclick="location.href='rules.html#gameplay'">
+                    
+                    <div class="rule-item">
                         <div class="rule-number">3</div>
-                        <div class="rule-title">Игровой<br>процесс</div>
+                        <div class="rule-title">Игровой процесс</div>
+                        <div class="rule-description">Запрет на читы, нарушение работы администрации, создание лаг-машин и использование багов сервера.</div>
+                        <a href="rules.html#gameplay" class="rule-link">Подробнее →</a>
                     </div>
-                </div>
-                <div class="rules-grid bottom">
-                    <div class="rule-island" onclick="location.href='rules.html#economy'">
+                    
+                    <div class="rule-item">
                         <div class="rule-number">4</div>
                         <div class="rule-title">Экономика</div>
+                        <div class="rule-description">Правила экономической системы сервера и запрет на обман игроков при торговле ресурсами.</div>
+                        <a href="rules.html#economy" class="rule-link">Подробнее →</a>
                     </div>
-                    <div class="rule-island" onclick="location.href='rules.html#lore'">
+                    
+                    <div class="rule-item">
                         <div class="rule-number">5</div>
-                        <div class="rule-title">Лор и<br>сюжет</div>
+                        <div class="rule-title">Лор и сюжет</div>
+                        <div class="rule-description">Защита лорных построек, запрет на мешание сценаристам и вымогательство спойлеров.</div>
+                        <a href="rules.html#lore" class="rule-link">Подробнее →</a>
                     </div>
-                    <div class="rule-island" onclick="location.href='rules.html#clans'">
+                    
+                    <div class="rule-item">
                         <div class="rule-number">6</div>
-                        <div class="rule-title">Кланы и<br>комьюнити</div>
+                        <div class="rule-title">Кланы и комьюнити</div>
+                        <div class="rule-description">Правила создания кланов, проведения войн и взаимодействия внутри сообщества.</div>
+                        <a href="rules.html#clans" class="rule-link">Подробнее →</a>
                     </div>
-                </div>
-                <div class="rules-link">
-                    <a href="rules.html" class="rules-button">Читать все правила</a>
                 </div>
             </div>
         </div>
@@ -879,7 +987,7 @@
                 <a href="https://project-primetime.gitbook.io/timeland" target="_blank">Вики</a>
                 <a href="rules.html">Правила</a>
             </div>
-            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2024 TimeLand. Все права защищены.</p>
+            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2025-2026 TimeLand. Все права защищены.</p>
         </div>
     </footer>
 
@@ -907,6 +1015,77 @@
             });
         }
 
+        // Dust particles effect
+        function createDustParticle() {
+            const dustContainer = document.getElementById('dustContainer');
+            const particle = document.createElement('div');
+            particle.className = 'dust-particle';
+            
+            // Random starting position
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            dustContainer.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 8000);
+        }
+
+        // Create dust particles periodically
+        setInterval(createDustParticle, 300);
+
+        // Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function createSliderNav() {
+            const nav = document.getElementById('sliderNav');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                nav.appendChild(dot);
+            }
+        }
+
+        function updateSlider() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
         // Scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -932,6 +1111,12 @@
             fadeElements.forEach((el, index) => {
                 el.style.transitionDelay = `${index * 0.1}s`;
             });
+
+            // Initialize slider
+            createSliderNav();
+            
+            // Auto-play slider
+            setInterval(nextSlide, 4000);
         });
 
         // Smooth scroll behavior for navigation links
@@ -969,6 +1154,10 @@
                 }
             });
         });
+
+        // Slider event listeners
+        document.getElementById('nextSlide').addEventListener('click', nextSlide);
+        document.getElementById('prevSlide').addEventListener('click', prevSlide);
     </script>
 </body>
 </html>
