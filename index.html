@@ -260,21 +260,37 @@
             margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 8px;
-            background: var(--gradient-gold);
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 25%, #2a2a2a 50%, #1f1f1f 75%, #2a2a2a 100%);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: glow 3s ease-in-out infinite alternate;
+            animation: shimmer 8s ease-in-out infinite;
             line-height: 1.1;
+            position: relative;
         }
 
-        @keyframes glow {
-            from {
-                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
-            }
-            to {
-                filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.5));
-            }
+        .hero h1::after {
+            content: 'TimeLand';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1f1f1f, #2a2a2a, #1a1a1a);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 8s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-description {
@@ -759,30 +775,27 @@
             background: var(--gradient-blue);
         }
 
-        /* Rules Preview Section */
+        /* Full Rules Section */
         .rules-section {
             background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
         }
 
-        .rules-grid {
+        .full-rules-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            gap: 40px;
         }
 
-        .rule-preview-card {
-            background: var(--bg-card);
-            border-radius: 25px;
-            padding: 35px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .rules-category {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            border-radius: 35px;
+            padding: 45px;
+            border: 1px solid transparent;
+            box-shadow: var(--shadow-soft);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            border: 2px solid transparent;
-            cursor: pointer;
         }
 
-        .rule-preview-card::before {
+        .rules-category::before {
             content: '';
             position: absolute;
             top: 0;
@@ -791,146 +804,286 @@
             height: 100%;
         }
 
-        .rule-preview-card.cyan::before {
-            background: #06b6d4;
+        .rules-category.cyan::before {
+            background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
         }
 
-        .rule-preview-card.green::before {
-            background: #10b981;
+        .rules-category.green::before {
+            background: linear-gradient(180deg, #10b981 0%, #059669 100%);
         }
 
-        .rule-preview-card.purple::before {
-            background: #a855f7;
+        .rules-category.purple::before {
+            background: linear-gradient(180deg, #a855f7 0%, #9333ea 100%);
         }
 
-        .rule-preview-card.gold::before {
-            background: #f59e0b;
+        .rules-category.gold::before {
+            background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
         }
 
-        .rule-preview-card.pink::before {
-            background: #ec4899;
+        .rules-category.pink::before {
+            background: linear-gradient(180deg, #ec4899 0%, #db2777 100%);
         }
 
-        .rule-preview-card.orange::before {
-            background: #f97316;
+        .rules-category.orange::before {
+            background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
         }
 
-        .rule-preview-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .rule-preview-card.cyan:hover {
+        .rules-category.cyan:hover {
             border-color: rgba(6, 182, 212, 0.3);
         }
 
-        .rule-preview-card.green:hover {
+        .rules-category.green:hover {
             border-color: rgba(16, 185, 129, 0.3);
         }
 
-        .rule-preview-card.purple:hover {
+        .rules-category.purple:hover {
             border-color: rgba(168, 85, 247, 0.3);
         }
 
-        .rule-preview-card.gold:hover {
+        .rules-category.gold:hover {
             border-color: rgba(245, 158, 11, 0.3);
         }
 
-        .rule-preview-card.pink:hover {
+        .rules-category.pink:hover {
             border-color: rgba(236, 72, 153, 0.3);
         }
 
-        .rule-preview-card.orange:hover {
+        .rules-category.orange:hover {
             border-color: rgba(249, 115, 22, 0.3);
         }
 
-        .rule-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            opacity: 0.3;
+        .category-title {
             font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
         }
 
-        .rule-preview-card.cyan .rule-number {
+        .rules-category.cyan .category-title {
             color: #06b6d4;
         }
 
-        .rule-preview-card.green .rule-number {
+        .rules-category.green .category-title {
             color: #10b981;
         }
 
-        .rule-preview-card.purple .rule-number {
+        .rules-category.purple .category-title {
             color: #a855f7;
         }
 
-        .rule-preview-card.gold .rule-number {
+        .rules-category.gold .category-title {
             color: #f59e0b;
         }
 
-        .rule-preview-card.pink .rule-number {
+        .rules-category.pink .category-title {
             color: #ec4899;
         }
 
-        .rule-preview-card.orange .rule-number {
+        .rules-category.orange .category-title {
             color: #f97316;
         }
 
-        .rule-title {
+        .category-number {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
+            border-radius: 50%;
+            color: #ffffff;
         }
 
-        .rule-preview-card.cyan .rule-title {
+        .rules-category.cyan .category-number {
+            background: var(--gradient-blue);
+        }
+
+        .rules-category.green .category-number {
+            background: var(--gradient-green);
+        }
+
+        .rules-category.purple .category-number {
+            background: var(--gradient-purple);
+        }
+
+        .rules-category.gold .category-number {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .rules-category.pink .category-number {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .rules-category.orange .category-number {
+            background: var(--gradient-orange);
+        }
+
+        .rule-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .rules-category.cyan .rule-item {
+            border-left-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .rules-category.green .rule-item {
+            border-left-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .rules-category.purple .rule-item {
+            border-left-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .rules-category.gold .rule-item {
+            border-left-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .rules-category.pink .rule-item {
+            border-left-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .rules-category.orange .rule-item {
+            border-left-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .rule-item:hover {
+            transform: translateX(5px);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .rule-number {
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 60px;
+            padding-top: 2px;
+        }
+
+        .rules-category.cyan .rule-number {
             color: #06b6d4;
         }
 
-        .rule-preview-card.green .rule-title {
+        .rules-category.green .rule-number {
             color: #10b981;
         }
 
-        .rule-preview-card.purple .rule-title {
+        .rules-category.purple .rule-number {
             color: #a855f7;
         }
 
-        .rule-preview-card.gold .rule-title {
+        .rules-category.gold .rule-number {
             color: #f59e0b;
         }
 
-        .rule-preview-card.pink .rule-title {
+        .rules-category.pink .rule-number {
             color: #ec4899;
         }
 
-        .rule-preview-card.orange .rule-title {
+        .rules-category.orange .rule-number {
             color: #f97316;
         }
 
-        .rule-description {
-            color: var(--text-secondary);
+        .rule-text {
+            flex: 1;
+            color: #ffffff;
             font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 20px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
-        .rule-link {
-            color: var(--gold-light);
-            text-decoration: none;
+        .punishment {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+            color: #f87171;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            margin-top: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        .rule-link:hover {
+        .punishment::before {
+            content: '⚠️';
+        }
+
+        .exception {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+            color: #34d399;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .exception::before {
+            content: '✓';
+        }
+
+        .note {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+            color: #60a5fa;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .note::before {
+            content: 'ℹ️';
+        }
+
+        .sub-rules {
+            margin-top: 15px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sub-rule {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .sub-rule::before {
+            content: '•';
+            position: absolute;
+            left: -18px;
             color: var(--gold);
-            transform: translateX(5px);
+        }
+
+        .sub-rule strong {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         /* Footer */
@@ -1263,93 +1416,309 @@
         </div>
     </section>
 
-    <!-- Rules Preview Section -->
+    <!-- Full Rules Section -->
     <section id="rules" class="section rules-section">
         <div class="container">
             <h2 class="section-title fade-in">Правила сервера</h2>
-            <div class="rules-grid">
-                <div class="rule-preview-card cyan fade-in">
-                    <div class="rule-number">01</div>
-                    <div class="rule-title">Игровой и дискорд чат</div>
-                    <div class="rule-description">
-                        Правила общения в чате и дискорде. Запрет на оскорбления, спам, угрозы и выдачу за администрацию.
+            <div class="full-rules-container">
+                <!-- Game and Discord Chat -->
+                <div class="rules-category cyan fade-in">
+                    <h3 class="category-title">
+                        <span class="category-number">1</span>
+                        Игровой и дискорд чат
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.1</span>
+                            <div class="rule-text">Запрещено оскорбление игроков, администрации, а также родственников их всех.</div>
+                        </div>
+                        <div class="punishment">Мут от 60 минут до 3 часов</div>
                     </div>
-                    <a href="rules.html#chat" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.2</span>
+                            <div class="rule-text">Запрещено спамить/флудить</div>
+                        </div>
+                        <div class="punishment">Мут от 10 минут до 30 минут</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.3</span>
+                            <div class="rule-text">Запрещено угрожать кому то баном или мутом без причины.</div>
+                        </div>
+                        <div class="punishment">Мут 30 минут</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.4</span>
+                            <div class="rule-text">Запрещено выдавать себя за участника администрации.</div>
+                        </div>
+                        <div class="punishment">Мут 2 часа</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.5</span>
+                            <div class="rule-text">Разрешено само оскорбление.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.6</span>
+                            <div class="rule-text">Личный, личный дискорд, голосовой чат не модерируются.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.7</span>
+                            <div class="rule-text">Запрещено воспроизводить резкие и не приятные звуки (Орать в микрофон и т.п)</div>
+                        </div>
+                        <div class="punishment">Мут от 10 минут до 30 минут</div>
+                    </div>
+
+                    <div class="sub-rules">
+                        <div class="sub-rule">
+                            <strong>1.7.1</strong> Запрещено использование войс мода. 
+                            <span class="punishment">Мут от 25 минут до 45 минут</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">1.8</span>
+                            <div class="rule-text">Запрещена реклама других серверов в профиле</div>
+                        </div>
+                        <div class="punishment">Бан из Discord</div>
+                    </div>
                 </div>
-                
-                <div class="rule-preview-card green fade-in" style="transition-delay: 0.1s;">
-                    <div class="rule-number">02</div>
-                    <div class="rule-title">Общие вопросы</div>
-                    <div class="rule-description">
-                        Запрет на кражу ресурсов, убийства без причины, таргетинг игроков и строительство неподобающих строений.
+
+                <!-- General Issues -->
+                <div class="rules-category green fade-in" style="transition-delay: 0.1s;">
+                    <h3 class="category-title">
+                        <span class="category-number">2</span>
+                        Общие вопросы
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">2.1</span>
+                            <div class="rule-text">Запрещена кража ресурсов (Кроме взятия в долг).</div>
+                        </div>
+                        <div class="punishment">Бан от 1 дня до 3 дней</div>
                     </div>
-                    <a href="rules.html#general" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">2.2</span>
+                            <div class="rule-text">Запрещено просто так убивать игроков (Во время афк, без причины и всё тому подобное).</div>
+                        </div>
+                        <div class="punishment">Бан 1 день</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">2.3</span>
+                            <div class="rule-text">Запрещено таргетить или охотится на игроков.</div>
+                        </div>
+                        <div class="punishment">Бан 1 день</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">2.4</span>
+                            <div class="rule-text">Запрещено строить пенисы и т.д</div>
+                        </div>
+                        <div class="punishment">Бан 3 дня</div>
+                    </div>
                 </div>
-                
-                <div class="rule-preview-card purple fade-in" style="transition-delay: 0.2s;">
-                    <div class="rule-number">03</div>
-                    <div class="rule-title">Игровой процесс</div>
-                    <div class="rule-description">
-                        Запрет на читы, нарушение работы администрации, создание лаг-машин и использование багов сервера.
+
+                <!-- Gameplay -->
+                <div class="rules-category purple fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="category-title">
+                        <span class="category-number">3</span>
+                        Игровой процесс
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">3.1</span>
+                            <div class="rule-text">
+                                Запрещено использование/хранение читов/программ которые сильно упрощают игровой процесс. 
+                                <span class="note">В зависимости от чита, и от урона который он принёс</span>
+                            </div>
+                        </div>
+                        <div class="sub-rules">
+                            <div class="sub-rule">
+                                <strong>Список читов/программ:</strong> X-Ray, всё что начинается с Auto (Auto Aim и т.д), Baritone и всё т.п.
+                            </div>
+                            <div class="sub-rule">
+                                <strong>Исключения:</strong> Full Bright (Gamma) и Freecam
+                            </div>
+                        </div>
+                        <div class="punishment">Бан до 8 дней</div>
                     </div>
-                    <a href="rules.html#gameplay" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">3.2</span>
+                            <div class="rule-text">Запрещено нарушать работу администрации</div>
+                        </div>
+                        <div class="punishment">Бан 1 день</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">3.3</span>
+                            <div class="rule-text">Запрещено строить лаг машины.</div>
+                        </div>
+                        <div class="punishment">Бан до 1 сезона</div>
+                    </div>
+
+                    <div class="sub-rules">
+                        <div class="sub-rule">
+                            <strong>3.3.1</strong> Запрещено строить механизмы которые будут мешать работе сервера. 
+                            <span class="punishment">Бан до 1 сезона</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">3.4</span>
+                            <div class="rule-text">Запрещено использовать баги сервера/майнкрафта.</div>
+                        </div>
+                        <div class="punishment">Бан до 8 дней</div>
+                    </div>
                 </div>
-                
-                <div class="rule-preview-card gold fade-in" style="transition-delay: 0.3s;">
-                    <div class="rule-number">04</div>
-                    <div class="rule-title">Экономика</div>
-                    <div class="rule-description">
-                        Правила экономической системы сервера и запрет на обман игроков при торговле ресурсами.
+
+                <!-- Economy -->
+                <div class="rules-category gold fade-in" style="transition-delay: 0.3s;">
+                    <h3 class="category-title">
+                        <span class="category-number">4</span>
+                        Экономика
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">4.1</span>
+                            <div class="rule-text">
+                                Главный экономический ресурс (Валюта) определяется самими игроками, также их может быть несколько.
+                            </div>
+                        </div>
                     </div>
-                    <a href="rules.html#economy" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">4.2</span>
+                            <div class="rule-text">Запрещён обман игроков на ресурсы или на эконом. ресурс.</div>
+                        </div>
+                        <div class="punishment">Бан от 1 дня до 4 дней</div>
+                    </div>
                 </div>
-                
-                <div class="rule-preview-card pink fade-in" style="transition-delay: 0.4s;">
-                    <div class="rule-number">05</div>
-                    <div class="rule-title">Лор и сюжет</div>
-                    <div class="rule-description">
-                        Защита лорных построек, запрет на мешание сценаристам и вымогательство спойлеров.
+
+                <!-- Lore and Story -->
+                <div class="rules-category pink fade-in" style="transition-delay: 0.4s;">
+                    <h3 class="category-title">
+                        <span class="category-number">5</span>
+                        Лор и сюжет
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">5.1</span>
+                            <div class="rule-text">Запрещено разрушать/ломать лорные постройки</div>
+                        </div>
+                        <div class="punishment">Бан от 1 дня до 1 недели</div>
+                        <div class="exception">Исключение: Разрешено лутать лорные постройки, и убивать мобов</div>
                     </div>
-                    <a href="rules.html#lore" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">5.2</span>
+                            <div class="rule-text">Запрещено подбирать вещи сценаристов</div>
+                        </div>
+                        <div class="punishment">Бан 2 дня</div>
+                        <div class="note">Уточнение: Если сценарист подкидывает записку, то можно, если ком. блоки то нельзя</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">5.3</span>
+                            <div class="rule-text">Не мешать проведению лора</div>
+                        </div>
+                        <div class="punishment">Бан 3 дня</div>
+                        <div class="sub-rules">
+                            <div class="sub-rule">
+                                <strong>Примеры:</strong> Не подходить близко к строящимся лорным постройкам, При виде создания лорной постройки/локации, не мешать её созданию
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">5.4</span>
+                            <div class="rule-text">Запрещено вымогать информацию у сценаристов (Спойлеры и т.д)</div>
+                        </div>
+                        <div class="punishment">Мут от 30 до 45 минут</div>
+                    </div>
                 </div>
-                
-                <div class="rule-preview-card orange fade-in" style="transition-delay: 0.5s;">
-                    <div class="rule-number">06</div>
-                    <div class="rule-title">Кланы и комьюнити</div>
-                    <div class="rule-description">
-                        Правила создания кланов, проведения войн и взаимодействия внутри сообщества.
+
+                <!-- Clans and Community -->
+                <div class="rules-category orange fade-in" style="transition-delay: 0.5s;">
+                    <h3 class="category-title">
+                        <span class="category-number">6</span>
+                        Кланы и комьюнити
+                    </h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">6.1</span>
+                            <div class="rule-text">
+                                Запрещено создавать кланы с названиями которые затрагивают политические темы
+                            </div>
+                        </div>
+                        <div class="punishment">Удаление клана, частичный лут территорий</div>
                     </div>
-                    <a href="rules.html#clans" class="rule-link">
-                        Подробнее
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">6.2</span>
+                            <div class="rule-text">Запрещено проводить набеги/войны на другие кланы</div>
+                        </div>
+                        <div class="punishment">Бан лидера и заместителя от 2 до 6 дней</div>
+                        <div class="exception">
+                            Исключение: Если желание клановой войны идёт со стороны обоих кланов, и они согласны её провести, то им выделяется отдельная зона для проведения войны. Исходы: Клан может поглотить другой клан, клан может взять какие то ресурсы у побеждённого клана
+                        </div>
+                    </div>
+
+                    <div class="sub-rules">
+                        <div class="sub-rule">
+                            <strong>6.2.1</strong> В случае если одна из сторон АФК, то война отменяется
+                        </div>
+                        <div class="sub-rule">
+                            <strong>6.2.2</strong> Игрокам разрешено ставить ставки на войны, а также приходить и смотреть их
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">6.3</span>
+                            <div class="rule-text">Для создания клана требуется как минимум 2 игрока.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-header">
+                            <span class="rule-number">6.4</span>
+                            <div class="rule-text">Запрещено добывать ресы с территорий чужих кланов.</div>
+                        </div>
+                        <div class="punishment">Бан 1 день</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1362,7 +1731,7 @@
                 <a href="https://discord.gg/2cwh6qDW" target="_blank">Discord</a>
                 <a href="https://boosty.to/timelanddev/" target="_blank">Boosty</a>
                 <a href="https://project-primetime.gitbook.io/timeland" target="_blank">Вики</a>
-                <a href="rules.html">Правила</a>
+                <a href="#rules">Правила</a>
             </div>
             <p class="footer-copy">&copy; 2025-2026 TimeLand. Все права защищены.</p>
         </div>
