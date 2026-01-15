@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сервера TimeLand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,39 +12,57 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-dark: #1f1f1f;
+            --bg-darker: #2a2a2a;
+            --bg-card: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #c9c9c9;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            --gradient-purple: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-orange: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
         body {
-            font-family: 'Arial Black', Arial, sans-serif;
-            background: linear-gradient(45deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1f1f1f 100%);
             background-size: 400% 400%;
-            animation: backgroundShift 8s ease-in-out infinite;
-            color: #ffffff;
-            line-height: 1.6;
+            animation: gradientShift 15s ease-in-out infinite;
+            color: var(--text-primary);
+            line-height: 1.7;
             overflow-x: hidden;
             position: relative;
         }
 
-        @keyframes backgroundShift {
+        @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
+            50% { background-position: 100% 50%; }
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Header */
         .header {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(31, 31, 31, 0.85);
             padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: var(--shadow-soft);
         }
 
         .nav {
@@ -53,216 +72,448 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            color: #f4d03f;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 1.6rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .back-button {
-            padding: 10px 20px;
-            background: rgba(212, 175, 55, 0.2);
-            color: #f4d03f;
-            text-decoration: none;
-            border-radius: 20px;
-            border: 1px solid #d4af37;
+            letter-spacing: 3px;
             transition: all 0.3s ease;
         }
 
+        .logo:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            padding: 12px 30px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-light);
+            text-decoration: none;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
         .back-button:hover {
-            background: rgba(212, 175, 55, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
         }
 
         /* Hero Section */
         .hero {
-            padding: 100px 0 60px;
+            padding: 120px 0 80px;
             text-align: center;
-            background: radial-gradient(ellipse at center, rgba(201, 160, 68, 0.1) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            color: #f4d03f;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 3rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 4px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #c9a044;
-            font-family: Arial, sans-serif;
-            max-width: 600px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
             margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         /* Main Content */
         .main-content {
-            padding: 60px 0;
+            padding: 60px 0 100px;
         }
 
         /* Rules Sections */
         .rules-section {
-            margin-bottom: 60px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            backdrop-filter: blur(10px);
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            border-radius: 35px;
+            padding: 50px;
+            border: 1px solid transparent;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rules-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+        }
+
+        .rules-section.cyan::before {
+            background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+        }
+
+        .rules-section.green::before {
+            background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+        }
+
+        .rules-section.purple::before {
+            background: linear-gradient(180deg, #a855f7 0%, #9333ea 100%);
+        }
+
+        .rules-section.gold::before {
+            background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .rules-section.pink::before {
+            background: linear-gradient(180deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .rules-section.orange::before {
+            background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+        }
+
+        .rules-section.cyan:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .rules-section.green:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .rules-section.purple:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .rules-section.gold:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .rules-section.pink:hover {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .rules-section.orange:hover {
+            border-color: rgba(249, 115, 22, 0.3);
         }
 
         .section-title {
+            font-family: 'Arial Black', Arial, sans-serif;
             font-size: 1.8rem;
-            color: #f4d03f;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            font-weight: 700;
+        }
+
+        .rules-section.cyan .section-title {
+            color: #06b6d4;
+        }
+
+        .rules-section.green .section-title {
+            color: #10b981;
+        }
+
+        .rules-section.purple .section-title {
+            color: #a855f7;
+        }
+
+        .rules-section.gold .section-title {
+            color: #f59e0b;
+        }
+
+        .rules-section.pink .section-title {
+            color: #ec4899;
+        }
+
+        .rules-section.orange .section-title {
+            color: #f97316;
         }
 
         .section-number {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #c9a044 0%, #d4af37 100%);
-            color: #000;
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            border-radius: 50%;
+            color: #ffffff;
+        }
+
+        .rules-section.cyan .section-number {
+            background: var(--gradient-blue);
+        }
+
+        .rules-section.green .section-number {
+            background: var(--gradient-green);
+        }
+
+        .rules-section.purple .section-number {
+            background: var(--gradient-purple);
+        }
+
+        .rules-section.gold .section-number {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .rules-section.pink .section-number {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .rules-section.orange .section-number {
+            background: var(--gradient-orange);
         }
 
         /* Rules List */
         .rule-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 4px solid #d4af37;
-            border-radius: 10px;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
             transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .rules-section.cyan .rule-item {
+            border-left-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .rules-section.green .rule-item {
+            border-left-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .rules-section.purple .rule-item {
+            border-left-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .rules-section.gold .rule-item {
+            border-left-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .rules-section.pink .rule-item {
+            border-left-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .rules-section.orange .rule-item {
+            border-left-color: rgba(249, 115, 22, 0.3);
         }
 
         .rule-item:hover {
             transform: translateX(5px);
-            border-left-color: #f4d03f;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .rule-header {
             display: flex;
-            justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 12px;
         }
 
         .rule-number {
-            color: #d4af37;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1rem;
-            min-width: 40px;
+            min-width: 60px;
+            padding-top: 2px;
+        }
+
+        .rules-section.cyan .rule-number {
+            color: #06b6d4;
+        }
+
+        .rules-section.green .rule-number {
+            color: #10b981;
+        }
+
+        .rules-section.purple .rule-number {
+            color: #a855f7;
+        }
+
+        .rules-section.gold .rule-number {
+            color: #f59e0b;
+        }
+
+        .rules-section.pink .rule-number {
+            color: #ec4899;
+        }
+
+        .rules-section.orange .rule-number {
+            color: #f97316;
         }
 
         .rule-text {
             flex: 1;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            line-height: 1.5;
-            margin-left: 15px;
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .punishment {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(233, 30, 99, 0.2) 100%);
-            color: #f4d03f;
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+            color: #f87171;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-size: 0.9rem;
-            font-weight: bold;
-            margin-left: 15px;
-            white-space: nowrap;
-            display: inline-block;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 10px;
-            font-family: Arial, sans-serif;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .punishment::before {
+            content: '⚠️';
         }
 
         .exception {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(139, 195, 74, 0.2) 100%);
-            color: #8BC34A;
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+            color: #34d399;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-size: 0.9rem;
-            margin-left: 15px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 10px;
-            font-family: Arial, sans-serif;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .exception::before {
+            content: '✓';
         }
 
         .note {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(100, 181, 246, 0.2) 100%);
-            color: #64B5F6;
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+            color: #60a5fa;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-size: 0.9rem;
-            margin-left: 15px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 10px;
-            font-family: Arial, sans-serif;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .note::before {
+            content: 'ℹ️';
         }
 
         /* Sub-rules */
         .sub-rules {
-            margin-top: 15px;
-            margin-left: 55px;
+            margin-top: 20px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .sub-rule {
-            color: #c9a044;
-            font-family: Arial, sans-serif;
-            margin-bottom: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
             font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .sub-rule::before {
+            content: '•';
+            position: absolute;
+            left: -18px;
+            color: var(--gold);
+        }
+
+        .sub-rule strong {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         /* Disclaimer */
         .disclaimer {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid #d4af37;
-            border-radius: 15px;
-            padding: 30px;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 35px;
+            padding: 50px;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 60px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .disclaimer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .disclaimer > * {
+            position: relative;
+            z-index: 1;
         }
 
         .disclaimer h3 {
-            color: #f4d03f;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-family: 'Arial Black', Arial, sans-serif;
         }
 
         .disclaimer p {
-            color: #c9a044;
-            font-family: Arial, sans-serif;
+            color: var(--text-secondary);
             font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.7;
         }
 
         /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
+            padding: 60px 0 40px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-copy {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 10px;
         }
 
         /* Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .fade-in.visible {
@@ -272,33 +523,62 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                letter-spacing: 2px;
             }
 
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                padding: 0 15px;
             }
 
             .rules-section {
-                padding: 25px;
+                padding: 30px 25px;
+                border-radius: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
 
             .rule-header {
                 flex-direction: column;
+                gap: 10px;
             }
 
-            .punishment {
-                margin-left: 0;
-                margin-top: 10px;
+            .rule-number {
+                min-width: auto;
             }
 
             .sub-rules {
-                margin-left: 20px;
+                margin-left: 0;
+                padding-left: 15px;
             }
 
-            .section-title {
-                font-size: 1.5rem;
+            .disclaimer {
+                padding: 35px 25px;
+            }
+
+            .disclaimer h3 {
+                font-size: 1.3rem;
+            }
+
+            .disclaimer p {
+                font-size: 1rem;
             }
         }
 
@@ -310,6 +590,24 @@
         ::selection {
             background: rgba(212, 175, 55, 0.3);
             color: #fff;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-gold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-light);
         }
     </style>
 </head>
@@ -328,7 +626,10 @@
     <section class="hero">
         <div class="container">
             <h1>Правила сервера</h1>
-            <p>Пожалуйста, внимательно ознакомьтесь с правилами перед началом игры на сервере. Соблюдение правил обеспечивает комфортную игру для всех участников.</p>
+            <p>
+                Пожалуйста, внимательно ознакомьтесь с правилами перед началом игры на сервере. 
+                Соблюдение правил обеспечивает комфортную игру для всех участников.
+            </p>
         </div>
     </section>
 
@@ -336,7 +637,7 @@
     <main class="main-content">
         <div class="container">
             <!-- Game and Discord Chat -->
-            <div id="chat" class="rules-section fade-in">
+            <div id="chat" class="rules-section cyan fade-in">
                 <h2 class="section-title">
                     <span class="section-number">1</span>
                     Игровой и дискорд чат
@@ -347,7 +648,7 @@
                         <span class="rule-number">1.1</span>
                         <div class="rule-text">Запрещено оскорбление игроков, администрации, а также родственников их всех.</div>
                     </div>
-                    <span class="punishment">Мут от 60 минут до 3 часов</span>
+                    <div class="punishment">Мут от 60 минут до 3 часов</div>
                 </div>
 
                 <div class="rule-item">
@@ -355,7 +656,7 @@
                         <span class="rule-number">1.2</span>
                         <div class="rule-text">Запрещено спамить/флудить</div>
                     </div>
-                    <span class="punishment">Мут от 10 минут до 30 минут</span>
+                    <div class="punishment">Мут от 10 минут до 30 минут</div>
                 </div>
 
                 <div class="rule-item">
@@ -363,7 +664,7 @@
                         <span class="rule-number">1.3</span>
                         <div class="rule-text">Запрещено угрожать кому то баном или мутом без причины.</div>
                     </div>
-                    <span class="punishment">Мут 30 минут</span>
+                    <div class="punishment">Мут 30 минут</div>
                 </div>
 
                 <div class="rule-item">
@@ -371,7 +672,7 @@
                         <span class="rule-number">1.4</span>
                         <div class="rule-text">Запрещено выдавать себя за участника администрации.</div>
                     </div>
-                    <span class="punishment">Мут 2 часа</span>
+                    <div class="punishment">Мут 2 часа</div>
                 </div>
 
                 <div class="rule-item">
@@ -393,11 +694,14 @@
                         <span class="rule-number">1.7</span>
                         <div class="rule-text">Запрещено воспроизводить резкие и не приятные звуки (Орать в микрофон и т.п)</div>
                     </div>
-                    <span class="punishment">Мут от 10 минут до 30 минут</span>
+                    <div class="punishment">Мут от 10 минут до 30 минут</div>
                 </div>
 
                 <div class="sub-rules">
-                    <div class="sub-rule">1.7.1 Запрещено использование войс мода. <span class="punishment">Мут от 25 минут до 45 минут</span></div>
+                    <div class="sub-rule">
+                        <strong>1.7.1</strong> Запрещено использование войс мода. 
+                        <span class="punishment">Мут от 25 минут до 45 минут</span>
+                    </div>
                 </div>
 
                 <div class="rule-item">
@@ -405,12 +709,12 @@
                         <span class="rule-number">1.8</span>
                         <div class="rule-text">Запрещена реклама других серверов в профиле</div>
                     </div>
-                    <span class="punishment">Бан из Discord</span>
+                    <div class="punishment">Бан из Discord</div>
                 </div>
             </div>
 
             <!-- General Issues -->
-            <div id="general" class="rules-section fade-in">
+            <div id="general" class="rules-section green fade-in">
                 <h2 class="section-title">
                     <span class="section-number">2</span>
                     Общие вопросы
@@ -421,7 +725,7 @@
                         <span class="rule-number">2.1</span>
                         <div class="rule-text">Запрещена кража ресурсов (Кроме взятия в долг).</div>
                     </div>
-                    <span class="punishment">Бан от 1 дня до 3 дней</span>
+                    <div class="punishment">Бан от 1 дня до 3 дней</div>
                 </div>
 
                 <div class="rule-item">
@@ -429,7 +733,7 @@
                         <span class="rule-number">2.2</span>
                         <div class="rule-text">Запрещено просто так убивать игроков (Во время афк, без причины и всё тому подобное).</div>
                     </div>
-                    <span class="punishment">Бан 1 день</span>
+                    <div class="punishment">Бан 1 день</div>
                 </div>
 
                 <div class="rule-item">
@@ -437,7 +741,7 @@
                         <span class="rule-number">2.3</span>
                         <div class="rule-text">Запрещено таргетить или охотится на игроков.</div>
                     </div>
-                    <span class="punishment">Бан 1 день</span>
+                    <div class="punishment">Бан 1 день</div>
                 </div>
 
                 <div class="rule-item">
@@ -445,12 +749,12 @@
                         <span class="rule-number">2.4</span>
                         <div class="rule-text">Запрещено строить пенисы и т.д</div>
                     </div>
-                    <span class="punishment">Бан 3 дня</span>
+                    <div class="punishment">Бан 3 дня</div>
                 </div>
             </div>
 
             <!-- Gameplay -->
-            <div id="gameplay" class="rules-section fade-in">
+            <div id="gameplay" class="rules-section purple fade-in">
                 <h2 class="section-title">
                     <span class="section-number">3</span>
                     Игровой процесс
@@ -459,12 +763,20 @@
                 <div class="rule-item">
                     <div class="rule-header">
                         <span class="rule-number">3.1</span>
-                        <div class="rule-text">Запрещено использование/хранение читов/программ которые сильно упрощают игровой процесс. <span class="note">В зависимости от чита, и от урона который он принёс</span></div>
+                        <div class="rule-text">
+                            Запрещено использование/хранение читов/программ которые сильно упрощают игровой процесс. 
+                            <span class="note">В зависимости от чита, и от урона который он принёс</span>
+                        </div>
                     </div>
                     <div class="sub-rules">
-                        <div class="sub-rule"><strong>Список читов/программ:</strong> X-Ray, всё что начинается с Auto (Auto Aim и т.д), Baritone и всё т.п.</div>
-                        <div class="sub-rule"><strong>Исключения:</strong> Full Bright (Gamma) и Freecam</div>
+                        <div class="sub-rule">
+                            <strong>Список читов/программ:</strong> X-Ray, всё что начинается с Auto (Auto Aim и т.д), Baritone и всё т.п.
+                        </div>
+                        <div class="sub-rule">
+                            <strong>Исключения:</strong> Full Bright (Gamma) и Freecam
+                        </div>
                     </div>
+                    <div class="punishment">Бан до 8 дней</div>
                 </div>
 
                 <div class="rule-item">
@@ -472,7 +784,7 @@
                         <span class="rule-number">3.2</span>
                         <div class="rule-text">Запрещено нарушать работу администрации</div>
                     </div>
-                    <span class="punishment">Бан 1 день</span>
+                    <div class="punishment">Бан 1 день</div>
                 </div>
 
                 <div class="rule-item">
@@ -480,11 +792,14 @@
                         <span class="rule-number">3.3</span>
                         <div class="rule-text">Запрещено строить лаг машины.</div>
                     </div>
-                    <span class="punishment">Бан до 1 сезона</span>
+                    <div class="punishment">Бан до 1 сезона</div>
                 </div>
 
                 <div class="sub-rules">
-                    <div class="sub-rule">3.3.1 Запрещено строить механизмы которые будут мешать работе сервера. <span class="punishment">Бан до 1 сезона</span></div>
+                    <div class="sub-rule">
+                        <strong>3.3.1</strong> Запрещено строить механизмы которые будут мешать работе сервера. 
+                        <span class="punishment">Бан до 1 сезона</span>
+                    </div>
                 </div>
 
                 <div class="rule-item">
@@ -492,12 +807,12 @@
                         <span class="rule-number">3.4</span>
                         <div class="rule-text">Запрещено использовать баги сервера/майнкрафта.</div>
                     </div>
-                    <span class="punishment">Бан до 8 дней</span>
+                    <div class="punishment">Бан до 8 дней</div>
                 </div>
             </div>
 
             <!-- Economy -->
-            <div id="economy" class="rules-section fade-in">
+            <div id="economy" class="rules-section gold fade-in">
                 <h2 class="section-title">
                     <span class="section-number">4</span>
                     Экономика
@@ -506,7 +821,9 @@
                 <div class="rule-item">
                     <div class="rule-header">
                         <span class="rule-number">4.1</span>
-                        <div class="rule-text">Главный экономический ресурс (Валюта) определяется самими игроками, также их может быть несколько.</div>
+                        <div class="rule-text">
+                            Главный экономический ресурс (Валюта) определяется самими игроками, также их может быть несколько.
+                        </div>
                     </div>
                 </div>
 
@@ -515,12 +832,12 @@
                         <span class="rule-number">4.2</span>
                         <div class="rule-text">Запрещён обман игроков на ресурсы или на эконом. ресурс.</div>
                     </div>
-                    <span class="punishment">Бан от 1 дня до 4 дней</span>
+                    <div class="punishment">Бан от 1 дня до 4 дней</div>
                 </div>
             </div>
 
             <!-- Lore and Story -->
-            <div id="lore" class="rules-section fade-in">
+            <div id="lore" class="rules-section pink fade-in">
                 <h2 class="section-title">
                     <span class="section-number">5</span>
                     Лор и сюжет
@@ -531,8 +848,8 @@
                         <span class="rule-number">5.1</span>
                         <div class="rule-text">Запрещено разрушать/ломать лорные постройки</div>
                     </div>
-                    <span class="punishment">Бан от 1 дня до 1 недели</span>
-                    <span class="exception">Исключение: Разрешено лутать лорные постройки, и убивать мобов</span>
+                    <div class="punishment">Бан от 1 дня до 1 недели</div>
+                    <div class="exception">Исключение: Разрешено лутать лорные постройки, и убивать мобов</div>
                 </div>
 
                 <div class="rule-item">
@@ -540,8 +857,8 @@
                         <span class="rule-number">5.2</span>
                         <div class="rule-text">Запрещено подбирать вещи сценаристов</div>
                     </div>
-                    <span class="punishment">Бан 2 дня</span>
-                    <span class="note">Уточнение: Если сценарист подкидывает записку, то можно, если ком. блоки то нельзя</span>
+                    <div class="punishment">Бан 2 дня</div>
+                    <div class="note">Уточнение: Если сценарист подкидывает записку, то можно, если ком. блоки то нельзя</div>
                 </div>
 
                 <div class="rule-item">
@@ -549,9 +866,11 @@
                         <span class="rule-number">5.3</span>
                         <div class="rule-text">Не мешать проведению лора</div>
                     </div>
-                    <span class="punishment">Бан 3 дня</span>
+                    <div class="punishment">Бан 3 дня</div>
                     <div class="sub-rules">
-                        <div class="sub-rule">Примеры: Не подходить близко к строящимся лорным постройкам, При виде создания лорной постройки/локации, не мешать её созданию</div>
+                        <div class="sub-rule">
+                            <strong>Примеры:</strong> Не подходить близко к строящимся лорным постройкам, При виде создания лорной постройки/локации, не мешать её созданию
+                        </div>
                     </div>
                 </div>
 
@@ -560,12 +879,12 @@
                         <span class="rule-number">5.4</span>
                         <div class="rule-text">Запрещено вымогать информацию у сценаристов (Спойлеры и т.д)</div>
                     </div>
-                    <span class="punishment">Мут от 30 до 45 минут</span>
+                    <div class="punishment">Мут от 30 до 45 минут</div>
                 </div>
             </div>
 
             <!-- Clans and Community -->
-            <div id="clans" class="rules-section fade-in">
+            <div id="clans" class="rules-section orange fade-in">
                 <h2 class="section-title">
                     <span class="section-number">6</span>
                     Кланы и комьюнити
@@ -574,9 +893,11 @@
                 <div class="rule-item">
                     <div class="rule-header">
                         <span class="rule-number">6.1</span>
-                        <div class="rule-text">Запрещено создавать кланы с названиями которые затрагивают политические темы</div>
+                        <div class="rule-text">
+                            Запрещено создавать кланы с названиями которые затрагивают политические темы
+                        </div>
                     </div>
-                    <span class="punishment">Удаление клана, частичный лут территорий</span>
+                    <div class="punishment">Удаление клана, частичный лут территорий</div>
                 </div>
 
                 <div class="rule-item">
@@ -584,13 +905,19 @@
                         <span class="rule-number">6.2</span>
                         <div class="rule-text">Запрещено проводить набеги/войны на другие кланы</div>
                     </div>
-                    <span class="punishment">Бан лидера и заместителя от 2 до 6 дней</span>
-                    <span class="exception">Исключение: Если желание клановой войны идёт со стороны обоих кланов, и они согласны её провести, то им выделяется отдельная зона для проведения войны. Исходы: Клан может поглотить другой клан, клан может взять какие то ресурсы у побеждённого клана</span>
+                    <div class="punishment">Бан лидера и заместителя от 2 до 6 дней</div>
+                    <div class="exception">
+                        Исключение: Если желание клановой войны идёт со стороны обоих кланов, и они согласны её провести, то им выделяется отдельная зона для проведения войны. Исходы: Клан может поглотить другой клан, клан может взять какие то ресурсы у побеждённого клана
+                    </div>
                 </div>
 
                 <div class="sub-rules">
-                    <div class="sub-rule">6.2.1 В случае если одна из сторон АФК, то война отменяется</div>
-                    <div class="sub-rule">6.2.2 Игрокам разрешено ставить ставки на войны, а также приходить и смотреть их</div>
+                    <div class="sub-rule">
+                        <strong>6.2.1</strong> В случае если одна из сторон АФК, то война отменяется
+                    </div>
+                    <div class="sub-rule">
+                        <strong>6.2.2</strong> Игрокам разрешено ставить ставки на войны, а также приходить и смотреть их
+                    </div>
                 </div>
 
                 <div class="rule-item">
@@ -605,14 +932,17 @@
                         <span class="rule-number">6.4</span>
                         <div class="rule-text">Запрещено добывать ресы с территорий чужих кланов.</div>
                     </div>
-                    <span class="punishment">Бан 1 день</span>
+                    <div class="punishment">Бан 1 день</div>
                 </div>
             </div>
 
             <!-- Disclaimer -->
             <div class="disclaimer fade-in">
                 <h3>Важное примечание</h3>
-                <p>Правила могут меняться. Администрация оставляет за собой право на изменение наказаний в зависимости от обстоятельств и тяжести нарушения.</p>
+                <p>
+                    Правила могут меняться. Администрация оставляет за собой право на изменение наказаний 
+                    в зависимости от обстоятельств и тяжести нарушения.
+                </p>
             </div>
         </div>
     </main>
@@ -620,8 +950,8 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2025-2026 TimeLand. Все права защищены.</p>
-            <p style="color: #c9a044; font-family: Arial, sans-serif; margin-top: 10px; font-size: 0.9rem;">Соблюдайте правила и получайте удовольствие от игры!</p>
+            <p class="footer-copy">&copy; 2025-2026 TimeLand. Все права защищены.</p>
+            <p class="footer-copy">Соблюдайте правила и получайте удовольствие от игры!</p>
         </div>
     </footer>
 
@@ -645,6 +975,11 @@
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => {
                 observer.observe(el);
+            });
+            
+            // Add some delay to stagger animations
+            fadeElements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 0.1}s`;
             });
         });
 

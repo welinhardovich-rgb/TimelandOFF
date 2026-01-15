@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TimeLand - Vanilla Minecraft сервер с сюжетом</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,22 +12,40 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-dark: #1f1f1f;
+            --bg-darker: #2a2a2a;
+            --bg-card: #3a3a3a;
+            --text-primary: #ffffff;
+            --text-secondary: #c9c9c9;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            --gradient-purple: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-orange: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --gradient-discord: linear-gradient(135deg, #5865F2 0%, #7289da 100%);
+            --gradient-wiki: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+            --gradient-boosty: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
         body {
-            font-family: 'Arial Black', Arial, sans-serif;
-            background: linear-gradient(45deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1f1f1f 100%);
             background-size: 400% 400%;
-            animation: backgroundShift 8s ease-in-out infinite;
-            color: #ffffff;
-            line-height: 1.6;
+            animation: gradientShift 15s ease-in-out infinite;
+            color: var(--text-primary);
+            line-height: 1.7;
             overflow-x: hidden;
             position: relative;
         }
 
-        @keyframes backgroundShift {
+        @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
+            50% { background-position: 100% 50%; }
         }
 
         /* Dust particles effect */
@@ -43,11 +62,11 @@
 
         .dust-particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: radial-gradient(circle, rgba(218, 165, 32, 0.8) 0%, rgba(218, 165, 32, 0.3) 50%, transparent 100%);
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, rgba(212, 175, 55, 0.2) 50%, transparent 100%);
             border-radius: 50%;
-            animation: floatUp 6s linear infinite;
+            animation: floatUp 8s linear infinite;
         }
 
         @keyframes floatUp {
@@ -73,12 +92,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(218, 165, 32, 0.5);
-            padding: 15px 0;
+            background: rgba(31, 31, 31, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 20px 0;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+            box-shadow: var(--shadow-soft);
         }
 
         .top-nav .container {
@@ -87,50 +106,131 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
+            position: relative;
         }
 
         .logo {
-            font-size: 1.8rem;
-            color: #daa520;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 1.6rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(218, 165, 32, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 3px;
             transition: all 0.3s ease;
         }
 
         .logo:hover {
-            color: #ffd700;
-            text-shadow: 0 0 25px rgba(218, 165, 32, 1), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            filter: brightness(1.2);
+            transform: scale(1.05);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
-            color: #c9a044;
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
         .nav-links a:hover {
-            color: #daa520;
-            background: rgba(218, 165, 32, 0.15);
-            border-color: rgba(218, 165, 32, 0.4);
-            transform: translateY(-2px);
+            color: var(--gold-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Social Buttons */
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover::before {
+            transform: scale(1);
+        }
+
+        .social-btn:hover {
+            transform: scale(1.15) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-btn.discord {
+            background: var(--gradient-discord);
+        }
+
+        .social-btn.wiki {
+            background: var(--gradient-wiki);
+        }
+
+        .social-btn.boosty {
+            background: var(--gradient-boosty);
+        }
+
+        .social-btn svg {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
             position: relative;
             z-index: 2;
         }
@@ -143,284 +243,359 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(218, 165, 32, 0.05) 0%, transparent 70%);
-            padding-top: 80px;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            padding-top: 100px;
         }
 
         .hero-content {
             animation: fadeInUp 1.2s ease-out;
             z-index: 3;
             position: relative;
+            max-width: 900px;
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 4.5rem;
             margin-bottom: 2rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #daa520;
-            text-shadow: 0 0 30px rgba(218, 165, 32, 0.8), 3px 3px 6px rgba(0, 0, 0, 0.9);
-            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 8px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+            line-height: 1.1;
         }
 
         @keyframes glow {
             from {
-                text-shadow: 0 0 20px rgba(218, 165, 32, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.9);
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
             }
             to {
-                text-shadow: 0 0 40px rgba(218, 165, 32, 1), 3px 3px 6px rgba(0, 0, 0, 0.9);
+                filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.5));
             }
         }
 
         .hero-description {
-            font-size: 1.4rem;
-            margin-bottom: 2rem;
-            color: #cd853f;
-            font-family: Arial, sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.7;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 18px 45px;
-            background: linear-gradient(135deg, #cd853f 0%, #daa520 50%, #ffd700 100%);
-            color: #000;
+            padding: 18px 50px;
+            background: var(--gradient-gold);
+            color: #1a1a2e;
             text-decoration: none;
-            border-radius: 35px;
-            font-weight: bold;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
-            border: 2px solid transparent;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.6);
-            background: linear-gradient(135deg, #daa520 0%, #ffd700 50%, #cd853f 100%);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
         }
 
         /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: #daa520;
+            color: var(--gold);
             text-align: center;
             animation: bounce 2s infinite;
         }
 
         .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             margin-bottom: 10px;
-            opacity: 0.7;
+            opacity: 0.6;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            40% { transform: translateX(-50%) translateY(-12px); }
+            60% { transform: translateX(-50%) translateY(-6px); }
         }
 
         /* Sections */
         .section {
-            padding: 100px 0;
+            padding: 120px 0;
             position: relative;
-            background: rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.8rem;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 2.5rem;
             margin-bottom: 4rem;
-            color: #daa520;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #cd853f, transparent);
-            margin: 1.5rem auto 0;
-            border-radius: 2px;
+        /* Why Choose Us Section */
+        .why-us-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
         }
 
-        /* Server Info */
-        .server-info {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 25px;
-            padding: 50px;
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 40px 30px;
             text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.4);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .server-info h3 {
-            color: #cd853f;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
-
-        .server-ip {
-            font-size: 2rem;
-            color: #ffd700;
-            margin: 30px 0;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 20px;
-            display: inline-block;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(218, 165, 32, 0.5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .server-ip:hover {
-            background: rgba(218, 165, 32, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
-        }
-
-        .server-ip.copied {
-            background: rgba(76, 175, 80, 0.3);
-            border-color: #4CAF50;
-        }
-
-        /* Why Us Section - Slider */
-        .why-us-slider {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            max-width: 800px;
-            margin: 50px auto;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 25px;
-            padding: 50px;
-            border: 2px solid rgba(218, 165, 32, 0.4);
             overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid transparent;
         }
 
-        .slider-container {
-            position: relative;
-            height: 400px;
-        }
-
-        .slide {
+        .why-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .why-card.purple::before {
+            background: var(--gradient-purple);
+        }
+
+        .why-card.blue::before {
+            background: var(--gradient-blue);
+        }
+
+        .why-card.green::before {
+            background: var(--gradient-green);
+        }
+
+        .why-card.orange::before {
+            background: var(--gradient-orange);
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .why-card.purple:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .why-card.blue:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .why-card.green:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .why-card.orange:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .why-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .why-card:hover .why-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .why-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .why-card.purple h3 {
+            color: #ec4899;
+        }
+
+        .why-card.blue h3 {
+            color: #06b6d4;
+        }
+
+        .why-card.green h3 {
+            color: #10b981;
+        }
+
+        .why-card.orange h3 {
+            color: #f97316;
+        }
+
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Server Info Section */
+        .server-info-section {
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+
+        .server-info {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            border-radius: 40px;
+            padding: 60px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: var(--shadow-soft);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .server-info > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .server-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .server-info p {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .server-ip {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            padding: 25px 50px;
+            background: var(--gradient-gold);
+            border-radius: 50px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-ip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.5s ease-in-out;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
         }
 
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
+        .server-ip:hover::before {
+            left: 100%;
         }
 
-        .slide.prev {
-            transform: translateX(-100%);
+        .server-ip:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
         }
 
-        .slide-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #cd853f;
+        .server-ip.copied {
+            background: var(--gradient-green);
         }
 
-        .slide h3 {
-            font-size: 1.6rem;
-            color: #daa520;
-            margin-bottom: 20px;
+        #copy-hint {
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 8px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
-        .slide p {
-            color: #c9a044;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            max-width: 600px;
+        /* Donation Section */
+        .donation-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
         }
 
-        .slider-nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(218, 165, 32, 0.3);
-            border: 2px solid #cd853f;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: #daa520;
-            box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
-        }
-
-        .slider-arrows {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            pointer-events: none;
-        }
-
-        .slider-arrow {
-            background: rgba(218, 165, 32, 0.2);
-            border: 2px solid #cd853f;
-            color: #daa520;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            pointer-events: all;
-        }
-
-        .slider-arrow:hover {
-            background: rgba(218, 165, 32, 0.4);
-            transform: scale(1.1);
-        }
-
-        /* Donation Cards */
         .donation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -429,233 +604,373 @@
         }
 
         .donation-card {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 25px;
-            padding: 35px;
+            background: var(--bg-card);
+            border-radius: 35px;
+            padding: 45px 35px;
             text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.4);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
         }
 
         .donation-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            border-radius: 35px 35px 0 0;
         }
 
-        .donation-card:hover::before {
-            opacity: 1;
+        .donation-card.gold::before {
+            background: var(--gradient-gold);
+        }
+
+        .donation-card.purple::before {
+            background: var(--gradient-purple);
+        }
+
+        .donation-card.blue::before {
+            background: var(--gradient-blue);
         }
 
         .donation-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(218, 165, 32, 0.7);
-            box-shadow: 0 20px 50px rgba(218, 165, 32, 0.2);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .donation-card.gold:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .donation-card.purple:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .donation-card.blue:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .donation-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
         .donation-card h3 {
-            font-size: 1.6rem;
-            color: #daa520;
+            font-size: 1.5rem;
             margin-bottom: 15px;
-            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .donation-card.gold h3 {
+            color: var(--gold-light);
+        }
+
+        .donation-card.purple h3 {
+            color: #ec4899;
+        }
+
+        .donation-card.blue h3 {
+            color: #06b6d4;
         }
 
         .donation-price {
-            font-size: 2.2rem;
-            color: #ffd700;
-            margin-bottom: 20px;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .donation-card.purple .donation-price {
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .donation-card.blue .donation-price {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .donation-description {
-            color: #c9a044;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .donate-button {
             display: inline-block;
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #cd853f 0%, #daa520 100%);
-            color: #000;
+            padding: 15px 40px;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid #ffd700;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
             text-transform: uppercase;
-        }
-
-        .donate-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(218, 165, 32, 0.4);
-            background: linear-gradient(135deg, #daa520 0%, #ffd700 100%);
-        }
-
-        /* Quick Access */
-        .quick-access {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 25px;
-            padding: 50px;
-            text-align: center;
-            border: 2px solid rgba(218, 165, 32, 0.4);
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .access-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 30px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #c9a044;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(218, 165, 32, 0.4);
-            gap: 12px;
-            font-weight: bold;
-        }
-
-        .access-button:hover {
-            background: rgba(218, 165, 32, 0.2);
-            border-color: #daa520;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(218, 165, 32, 0.2);
-            color: #daa520;
-        }
-
-        /* Rules Section - Inline Columns */
-        .rules-preview {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 25px;
-            padding: 50px;
-            margin-top: 50px;
-            border: 2px solid rgba(218, 165, 32, 0.4);
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .rule-item {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 20px;
-            padding: 30px 20px;
-            border: 2px solid rgba(218, 165, 32, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .rule-item::before {
+        .donate-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s ease;
         }
 
-        .rule-item:hover::before {
+        .donate-button:hover::before {
             left: 100%;
         }
 
-        .rule-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(218, 165, 32, 0.6);
-            box-shadow: 0 10px 25px rgba(218, 165, 32, 0.2);
+        .donate-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .donation-card.gold .donate-button {
+            background: var(--gradient-gold);
+            color: #1a1a2e;
+        }
+
+        .donation-card.purple .donate-button {
+            background: var(--gradient-purple);
+        }
+
+        .donation-card.blue .donate-button {
+            background: var(--gradient-blue);
+        }
+
+        /* Rules Preview Section */
+        .rules-section {
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .rule-preview-card {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .rule-preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+        }
+
+        .rule-preview-card.cyan::before {
+            background: #06b6d4;
+        }
+
+        .rule-preview-card.green::before {
+            background: #10b981;
+        }
+
+        .rule-preview-card.purple::before {
+            background: #a855f7;
+        }
+
+        .rule-preview-card.gold::before {
+            background: #f59e0b;
+        }
+
+        .rule-preview-card.pink::before {
+            background: #ec4899;
+        }
+
+        .rule-preview-card.orange::before {
+            background: #f97316;
+        }
+
+        .rule-preview-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .rule-preview-card.cyan:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .rule-preview-card.green:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .rule-preview-card.purple:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .rule-preview-card.gold:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .rule-preview-card.pink:hover {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .rule-preview-card.orange:hover {
+            border-color: rgba(249, 115, 22, 0.3);
         }
 
         .rule-number {
-            font-size: 2rem;
-            color: #cd853f;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 15px;
+            opacity: 0.3;
+            font-family: 'Arial Black', Arial, sans-serif;
+        }
+
+        .rule-preview-card.cyan .rule-number {
+            color: #06b6d4;
+        }
+
+        .rule-preview-card.green .rule-number {
+            color: #10b981;
+        }
+
+        .rule-preview-card.purple .rule-number {
+            color: #a855f7;
+        }
+
+        .rule-preview-card.gold .rule-number {
+            color: #f59e0b;
+        }
+
+        .rule-preview-card.pink .rule-number {
+            color: #ec4899;
+        }
+
+        .rule-preview-card.orange .rule-number {
+            color: #f97316;
         }
 
         .rule-title {
-            font-size: 1.2rem;
-            color: #daa520;
-            text-transform: uppercase;
-            font-weight: bold;
+            font-size: 1.3rem;
             margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .rule-preview-card.cyan .rule-title {
+            color: #06b6d4;
+        }
+
+        .rule-preview-card.green .rule-title {
+            color: #10b981;
+        }
+
+        .rule-preview-card.purple .rule-title {
+            color: #a855f7;
+        }
+
+        .rule-preview-card.gold .rule-title {
+            color: #f59e0b;
+        }
+
+        .rule-preview-card.pink .rule-title {
+            color: #ec4899;
+        }
+
+        .rule-preview-card.orange .rule-title {
+            color: #f97316;
         }
 
         .rule-description {
-            color: #c9a044;
-            font-family: Arial, sans-serif;
+            color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 300;
         }
 
         .rule-link {
-            color: #ffd700;
+            color: var(--gold-light);
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            display: inline-block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .rule-link:hover {
-            color: #daa520;
-            text-shadow: 0 0 5px rgba(218, 165, 32, 0.5);
+            color: var(--gold);
+            transform: translateX(5px);
         }
 
         /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 50px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
+            padding: 60px 0 30px;
             text-align: center;
-            border-top: 2px solid rgba(218, 165, 32, 0.5);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: #c9a044;
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 25px;
+            border-radius: 50px;
             transition: all 0.3s ease;
             border: 1px solid transparent;
         }
 
         .footer-links a:hover {
-            color: #daa520;
-            background: rgba(218, 165, 32, 0.15);
-            border-color: rgba(218, 165, 32, 0.4);
-            transform: translateY(-2px);
+            color: var(--gold-light);
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .footer-copy {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
         }
 
         /* Animations */
@@ -673,7 +988,7 @@
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .fade-in.visible {
@@ -682,48 +997,80 @@
         }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 25px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+            }
+        }
+
         @media (max-width: 768px) {
             .top-nav .container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
+                padding: 15px 20px;
+            }
+
+            .social-buttons {
+                display: none;
             }
 
             .nav-links {
                 gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
             }
 
             .hero h1 {
-                font-size: 3rem;
-                letter-spacing: 2px;
+                font-size: 2.8rem;
+                letter-spacing: 3px;
             }
 
             .hero-description {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+                padding: 0 20px;
             }
 
             .section-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .section {
+                padding: 80px 0;
             }
 
             .server-info {
-                padding: 30px;
+                padding: 40px 25px;
+            }
+
+            .server-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .server-info p {
+                font-size: 1rem;
             }
 
             .server-ip {
-                font-size: 1.5rem;
-                padding: 15px 25px;
+                font-size: 1.3rem;
+                padding: 20px 30px;
             }
 
+            .why-us-grid,
             .donation-grid {
                 grid-template-columns: 1fr;
             }
 
             .rules-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .button-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -731,12 +1078,9 @@
                 gap: 15px;
             }
 
-            .why-us-slider {
-                padding: 30px;
-            }
-
-            .slider-container {
-                height: 350px;
+            .footer-links a {
+                font-size: 0.85rem;
+                padding: 8px 15px;
             }
         }
 
@@ -747,8 +1091,26 @@
 
         /* Selection color */
         ::selection {
-            background: rgba(218, 165, 32, 0.3);
+            background: rgba(212, 175, 55, 0.3);
             color: #fff;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-gold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-light);
         }
     </style>
 </head>
@@ -761,12 +1123,28 @@
         <div class="container">
             <a href="#hero" class="logo">TimeLand</a>
             <ul class="nav-links">
-                <li><a href="#info">Сервер</a></li>
+                <li><a href="#server-info">Сервер</a></li>
                 <li><a href="#why-us">Почему мы?</a></li>
                 <li><a href="#donate">Донат</a></li>
-                <li><a href="#quick-access">Сообщество</a></li>
                 <li><a href="#rules">Правила</a></li>
             </ul>
+            <div class="social-buttons">
+                <a href="https://discord.gg/2cwh6qDW" target="_blank" class="social-btn discord" title="Discord">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 6 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </a>
+                <a href="https://project-primetime.gitbook.io/timeland" target="_blank" class="social-btn wiki" title="Вики">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+                    </svg>
+                </a>
+                <a href="https://boosty.to/timelanddev/" target="_blank" class="social-btn boosty" title="Boosty">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -779,7 +1157,7 @@
                     Ванильный Minecraft сервер с уникальным сюжетом и дружелюбным сообществом. 
                     Погрузись в мир приключений, где каждая история уникальна, а дружба длится вечно.
                 </p>
-                <a href="#info" class="cta-button">Начать играть</a>
+                <a href="#server-info" class="cta-button">Начать играть</a>
             </div>
         </div>
         
@@ -788,17 +1166,49 @@
             <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
             </svg>
-            <div style="font-size: 0.9rem;">Листайте вниз</div>
+            <span>Листайте вниз</span>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="section why-us-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Почему именно Timeland?</h2>
+            <div class="why-us-grid">
+                <div class="why-card purple fade-in">
+                    <div class="why-icon">📖</div>
+                    <h3>Уникальный сюжет</h3>
+                    <p>Погрузись в увлекательную историю, созданную нашими талантливыми сценаристами. Каждая локация — часть большого приключения.</p>
+                </div>
+
+                <div class="why-card blue fade-in" style="transition-delay: 0.1s;">
+                    <div class="why-icon">👥</div>
+                    <h3>Активное сообщество</h3>
+                    <p>Дружное комьюнити, где можно найти друзей и весело провести время. Здесь каждый игрок важен и ценен.</p>
+                </div>
+
+                <div class="why-card green fade-in" style="transition-delay: 0.2s;">
+                    <div class="why-icon">⚖️</div>
+                    <h3>Справедливая экономика</h3>
+                    <p>Сбалансированная экономическая система, честная игра и прозрачные правила для всех участников.</p>
+                </div>
+
+                <div class="why-card orange fade-in" style="transition-delay: 0.3s;">
+                    <div class="why-icon">🎉</div>
+                    <h3>Интересные события</h3>
+                    <p>Регулярные ивенты, обновления и новые возможности, чтобы тебе всегда было интересно возвращаться в мир TimeLand.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Server Info Section -->
-    <section id="info" class="section">
+    <section id="server-info" class="section server-info-section">
         <div class="container">
             <h2 class="section-title fade-in">Информация о сервере</h2>
             <div class="server-info fade-in">
                 <h3>🎮 Добро пожаловать в наш мир!</h3>
-                <p style="color: #c9a044; margin-bottom: 30px; font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.7;">
+                <p>
                     TimeLand - это особенный сервер, где ванильный Minecraft встречается с уникальным сюжетом. 
                     Мы создали пространство, где каждый игрок может стать частью большой истории, 
                     найти новых друзей и окунуться в атмосферу настоящего приключения.
@@ -806,173 +1216,140 @@
                 
                 <div class="server-ip" onclick="copyIP()">
                     <span id="ip-text">timeland.litehosting.su</span>
-                    <span id="copy-hint" style="display: block; font-size: 0.9rem; color: #daa520; margin-top: 8px;">Нажмите для копирования</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section - Slider -->
-    <section id="why-us" class="section" style="background: rgba(0, 0, 0, 0.4);">
-        <div class="container">
-            <h2 class="section-title fade-in">Почему именно мы?</h2>
-            <div class="why-us-slider fade-in">
-                <div class="slider-container" id="sliderContainer">
-                    <div class="slide active">
-                        <div class="slide-icon">🤝</div>
-                        <h3>Добрая и отзывчивая администрация</h3>
-                        <p>На TimeLand всегда царит дружеская атмосфера. Команда следит за порядком, помогает игрокам и делает игру комфортной. Мы не живём на картошке, зато живём идеей — сделать лучший сервер!</p>
-                    </div>
-                    
-                    <div class="slide">
-                        <div class="slide-icon">📈</div>
-                        <h3>Сервер растёт и развивается</h3>
-                        <p>TimeLand активно растёт, и каждый игрок может стать частью этого. Приглашай друзей или поддержи сервер покупкой доната — помоги нам развиваться вместе!</p>
-                    </div>
-                    
-                    <div class="slide">
-                        <div class="slide-icon">⚡</div>
-                        <h3>Качественная сборка и уникальные моды</h3>
-                        <p>Наш сервер собран с любовью. Мы используем оптимизированные моды, чтобы обеспечить баланс, стабильность и интересную игру без лагов.</p>
-                    </div>
-                    
-                    <div class="slide">
-                        <div class="slide-icon">🔄</div>
-                        <h3>Постоянные обновления</h3>
-                        <p>Мы регулярно добавляем новые возможности, улучшения и ивенты, чтобы тебе всегда было интересно возвращаться в мир TimeLand!</p>
-                    </div>
-                    
-                    <div class="slide">
-                        <div class="slide-icon">👥</div>
-                        <h3>Дружное сообщество</h3>
-                        <p>Здесь каждый игрок важен. На сервере уже сложилось приятное сообщество, где можно найти друзей и весело провести время.</p>
-                    </div>
-                    
-                    <div class="slide">
-                        <div class="slide-icon">🎭</div>
-                        <h3>Уникальный сюжет и лор</h3>
-                        <p>Погрузись в увлекательную историю, созданную нашими талантливыми сценаристами. Каждая локация, каждый NPC — часть большого приключения.</p>
-                    </div>
-                </div>
-                
-                <div class="slider-nav" id="sliderNav"></div>
-                <div class="slider-arrows">
-                    <div class="slider-arrow" id="prevSlide">‹</div>
-                    <div class="slider-arrow" id="nextSlide">›</div>
+                    <span id="copy-hint">Нажмите для копирования</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Donation Section -->
-    <section id="donate" class="section">
+    <section id="donate" class="section donation-section">
         <div class="container">
             <h2 class="section-title fade-in">Поддержка сервера</h2>
             <div class="donation-grid">
-                <div class="donation-card fade-in">
-                    <h3>👑 Спонсор</h3>
+                <div class="donation-card gold fade-in">
+                    <div class="donation-icon">👑</div>
+                    <h3>Спонсор</h3>
                     <div class="donation-price">175₽</div>
-                    <p class="donation-description">Поддержите развитие сервера и получите доступ к эксклюзивным возможностям спонсора</p>
+                    <p class="donation-description">
+                        Поддержите развитие сервера и получите эксклюзивные привилегии спонсора. 
+                        Ваш вклад поможет сделать TimeLand ещё лучше!
+                    </p>
                     <a href="https://boosty.to/timelanddev/" target="_blank" class="donate-button">Поддержать</a>
                 </div>
 
-                <div class="donation-card fade-in" style="animation-delay: 0.1s;">
-                    <h3>🏷️ Кастомный титул</h3>
+                <div class="donation-card purple fade-in" style="transition-delay: 0.1s;">
+                    <div class="donation-icon">🏷️</div>
+                    <h3>Кастомный титул</h3>
                     <div class="donation-price">10₽</div>
-                    <p class="donation-description">Создайте уникальный титул, который будет отображаться перед вашим никнеймом в игре</p>
+                    <p class="donation-description">
+                        Создайте уникальный титул, который будет отображаться перед вашим никнеймом в игре. 
+                        Выделитесь среди других игроков!
+                    </p>
                     <a href="https://boosty.to/timelanddev/" target="_blank" class="donate-button">Купить</a>
                 </div>
 
-                <div class="donation-card fade-in" style="animation-delay: 0.2s;">
-                    <h3>✨ Кастомный стиль ника</h3>
+                <div class="donation-card blue fade-in" style="transition-delay: 0.2s;">
+                    <div class="donation-icon">✨</div>
+                    <h3>Кастомный стиль ника</h3>
                     <div class="donation-price">25₽</div>
-                    <p class="donation-description">Настройте стиль своего никнейма с различными форматированиями и эффектами</p>
+                    <p class="donation-description">
+                        Настройте стиль своего никнейма с различными форматированиями и эффектами. 
+                        Сделайте свой ник по-настоящему уникальным!
+                    </p>
                     <a href="https://boosty.to/timelanddev/" target="_blank" class="donate-button">Купить</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Access Section -->
-    <section id="quick-access" class="section" style="background: rgba(0, 0, 0, 0.4);">
-        <div class="container">
-            <h2 class="section-title fade-in">Наше сообщество</h2>
-            <div class="quick-access fade-in">
-                <p style="color: #c9a044; margin-bottom: 25px; font-family: Arial, sans-serif; font-size: 1.1rem;">Присоединяйтесь к нашему дружному комьюнити и получайте актуальную информацию</p>
-                
-                <div class="button-grid">
-                    <a href="https://discord.gg/2cwh6qDW" target="_blank" class="access-button">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 6 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                        </svg>
-                        Discord
-                    </a>
-
-                    <a href="https://boosty.to/timelanddev/" target="_blank" class="access-button">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                        Boosty
-                    </a>
-
-                    <a href="https://project-primetime.gitbook.io/timeland" target="_blank" class="access-button">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
-                        </svg>
-                        Вики
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rules Preview Section - Inline -->
-    <section id="rules" class="section">
+    <!-- Rules Preview Section -->
+    <section id="rules" class="section rules-section">
         <div class="container">
             <h2 class="section-title fade-in">Правила сервера</h2>
-            <div class="rules-preview fade-in">
-                <div class="rules-grid">
-                    <div class="rule-item">
-                        <div class="rule-number">1</div>
-                        <div class="rule-title">Игровой и Discord чат</div>
-                        <div class="rule-description">Правила общения в чате и дискорде. Запрет на оскорбления, спам, угрозы и выдачу за администрацию.</div>
-                        <a href="rules.html#chat" class="rule-link">Подробнее →</a>
+            <div class="rules-grid">
+                <div class="rule-preview-card cyan fade-in">
+                    <div class="rule-number">01</div>
+                    <div class="rule-title">Игровой и дискорд чат</div>
+                    <div class="rule-description">
+                        Правила общения в чате и дискорде. Запрет на оскорбления, спам, угрозы и выдачу за администрацию.
                     </div>
-                    
-                    <div class="rule-item">
-                        <div class="rule-number">2</div>
-                        <div class="rule-title">Общие вопросы</div>
-                        <div class="rule-description">Запрет на кражу ресурсов, убийства без причины, таргетинг игроков и строительство неподобающих строений.</div>
-                        <a href="rules.html#general" class="rule-link">Подробнее →</a>
+                    <a href="rules.html#chat" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="rule-preview-card green fade-in" style="transition-delay: 0.1s;">
+                    <div class="rule-number">02</div>
+                    <div class="rule-title">Общие вопросы</div>
+                    <div class="rule-description">
+                        Запрет на кражу ресурсов, убийства без причины, таргетинг игроков и строительство неподобающих строений.
                     </div>
-                    
-                    <div class="rule-item">
-                        <div class="rule-number">3</div>
-                        <div class="rule-title">Игровой процесс</div>
-                        <div class="rule-description">Запрет на читы, нарушение работы администрации, создание лаг-машин и использование багов сервера.</div>
-                        <a href="rules.html#gameplay" class="rule-link">Подробнее →</a>
+                    <a href="rules.html#general" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="rule-preview-card purple fade-in" style="transition-delay: 0.2s;">
+                    <div class="rule-number">03</div>
+                    <div class="rule-title">Игровой процесс</div>
+                    <div class="rule-description">
+                        Запрет на читы, нарушение работы администрации, создание лаг-машин и использование багов сервера.
                     </div>
-                    
-                    <div class="rule-item">
-                        <div class="rule-number">4</div>
-                        <div class="rule-title">Экономика</div>
-                        <div class="rule-description">Правила экономической системы сервера и запрет на обман игроков при торговле ресурсами.</div>
-                        <a href="rules.html#economy" class="rule-link">Подробнее →</a>
+                    <a href="rules.html#gameplay" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="rule-preview-card gold fade-in" style="transition-delay: 0.3s;">
+                    <div class="rule-number">04</div>
+                    <div class="rule-title">Экономика</div>
+                    <div class="rule-description">
+                        Правила экономической системы сервера и запрет на обман игроков при торговле ресурсами.
                     </div>
-                    
-                    <div class="rule-item">
-                        <div class="rule-number">5</div>
-                        <div class="rule-title">Лор и сюжет</div>
-                        <div class="rule-description">Защита лорных построек, запрет на мешание сценаристам и вымогательство спойлеров.</div>
-                        <a href="rules.html#lore" class="rule-link">Подробнее →</a>
+                    <a href="rules.html#economy" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="rule-preview-card pink fade-in" style="transition-delay: 0.4s;">
+                    <div class="rule-number">05</div>
+                    <div class="rule-title">Лор и сюжет</div>
+                    <div class="rule-description">
+                        Защита лорных построек, запрет на мешание сценаристам и вымогательство спойлеров.
                     </div>
-                    
-                    <div class="rule-item">
-                        <div class="rule-number">6</div>
-                        <div class="rule-title">Кланы и комьюнити</div>
-                        <div class="rule-description">Правила создания кланов, проведения войн и взаимодействия внутри сообщества.</div>
-                        <a href="rules.html#clans" class="rule-link">Подробнее →</a>
+                    <a href="rules.html#lore" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="rule-preview-card orange fade-in" style="transition-delay: 0.5s;">
+                    <div class="rule-number">06</div>
+                    <div class="rule-title">Кланы и комьюнити</div>
+                    <div class="rule-description">
+                        Правила создания кланов, проведения войн и взаимодействия внутри сообщества.
                     </div>
+                    <a href="rules.html#clans" class="rule-link">
+                        Подробнее
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -987,7 +1364,7 @@
                 <a href="https://project-primetime.gitbook.io/timeland" target="_blank">Вики</a>
                 <a href="rules.html">Правила</a>
             </div>
-            <p style="color: #c9a044; font-family: Arial, sans-serif;">&copy; 2025-2026 TimeLand. Все права защищены.</p>
+            <p class="footer-copy">&copy; 2025-2026 TimeLand. Все права защищены.</p>
         </div>
     </footer>
 
@@ -1001,17 +1378,17 @@
             navigator.clipboard.writeText(ipText).then(() => {
                 ipElement.classList.add('copied');
                 copyHint.textContent = '✓ Скопировано!';
-                copyHint.style.color = '#4CAF50';
+                copyHint.style.color = 'rgba(0, 0, 0, 0.8)';
                 
                 setTimeout(() => {
                     ipElement.classList.remove('copied');
                     copyHint.textContent = 'Нажмите для копирования';
-                    copyHint.style.color = '#daa520';
+                    copyHint.style.color = 'rgba(0, 0, 0, 0.6)';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy IP:', err);
                 copyHint.textContent = 'Ошибка копирования';
-                copyHint.style.color = '#f44336';
+                copyHint.style.color = 'rgba(239, 68, 68, 0.8)';
             });
         }
 
@@ -1023,7 +1400,7 @@
             
             // Random starting position
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
             particle.style.animationDelay = Math.random() * 2 + 's';
             
             dustContainer.appendChild(particle);
@@ -1033,58 +1410,11 @@
                 if (particle.parentNode) {
                     particle.parentNode.removeChild(particle);
                 }
-            }, 8000);
+            }, 12000);
         }
 
         // Create dust particles periodically
-        setInterval(createDustParticle, 300);
-
-        // Slider functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-
-        function createSliderNav() {
-            const nav = document.getElementById('sliderNav');
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'slider-dot';
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
-                nav.appendChild(dot);
-            }
-        }
-
-        function updateSlider() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                }
-            });
-
-            const dots = document.querySelectorAll('.slider-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlider();
-        }
+        setInterval(createDustParticle, 400);
 
         // Scroll animations
         const observerOptions = {
@@ -1111,12 +1441,6 @@
             fadeElements.forEach((el, index) => {
                 el.style.transitionDelay = `${index * 0.1}s`;
             });
-
-            // Initialize slider
-            createSliderNav();
-            
-            // Auto-play slider
-            setInterval(nextSlide, 4000);
         });
 
         // Smooth scroll behavior for navigation links
@@ -1154,10 +1478,6 @@
                 }
             });
         });
-
-        // Slider event listeners
-        document.getElementById('nextSlide').addEventListener('click', nextSlide);
-        document.getElementById('prevSlide').addEventListener('click', prevSlide);
     </script>
 </body>
 </html>
