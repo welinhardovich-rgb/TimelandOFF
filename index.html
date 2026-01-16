@@ -34,9 +34,9 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1f1f1f 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0f0f0f 100%);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease-in-out infinite;
+            animation: gradientShift 20s ease-in-out infinite;
             color: var(--text-primary);
             line-height: 1.7;
             overflow-x: hidden;
@@ -243,7 +243,7 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
             padding-top: 100px;
         }
 
@@ -260,55 +260,16 @@
             margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 8px;
-            color: #2a2a2a;
+            color: #d4af37;
             line-height: 1.1;
             position: relative;
             display: inline-block;
-        }
-
-        .hero h1::before {
-            content: 'TimeLand';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1f1f1f, #2a2a2a, #1a1a1a);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 8s ease-in-out infinite;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .hero-text-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero-text-container::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
-            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
-            animation: glowPulse 4s ease-in-out infinite;
-            z-index: -2;
-            border-radius: 50px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
         @keyframes shimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
         }
 
         .hero-description {
@@ -412,7 +373,7 @@
 
         /* Why Choose Us Section */
         .why-us-section {
-            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
         }
 
         .why-us-grid {
@@ -423,7 +384,7 @@
         }
 
         .why-card {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             border-radius: 30px;
             padding: 40px 30px;
             text-align: center;
@@ -524,11 +485,11 @@
 
         /* Server Info Section */
         .server-info-section {
-            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
         }
 
         .server-info {
-            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             border-radius: 40px;
             padding: 60px;
             text-align: center;
@@ -627,7 +588,7 @@
 
         /* Donation Section */
         .donation-section {
-            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            background: linear-gradient(180deg, #000000 0%, #050505 100%);
         }
 
         .donation-grid {
@@ -638,7 +599,7 @@
         }
 
         .donation-card {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             border-radius: 35px;
             padding: 45px 35px;
             text-align: center;
@@ -795,13 +756,19 @@
 
         /* Full Rules Section */
         .rules-section {
-            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            background: linear-gradient(180deg, #050505 0%, #000000 100%);
         }
 
         .full-rules-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .full-rules-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -811,7 +778,7 @@
         }
 
         .rules-category {
-            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             border-radius: 35px;
             padding: 45px;
             border: 1px solid transparent;
@@ -950,7 +917,7 @@
         .rule-item {
             margin-bottom: 20px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 20px;
             transition: all 0.3s ease;
             position: relative;
@@ -1113,7 +1080,7 @@
 
         /* Footer */
         footer {
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
             padding: 60px 0 30px;
             text-align: center;
             border-top: 1px solid rgba(212, 175, 55, 0.2);
@@ -1330,9 +1297,7 @@
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text-container">
-                    <h1>TimeLand</h1>
-                </div>
+                <h1>TimeLand</h1>
                 <p class="hero-description">
                     Ванильный Minecraft сервер с уникальным сюжетом и дружелюбным сообществом. 
                     Погрузись в мир приключений, где каждая история уникальна, а дружба длится вечно.
