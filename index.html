@@ -260,17 +260,13 @@
             margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 8px;
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 25%, #2a2a2a 50%, #1f1f1f 75%, #2a2a2a 100%);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 8s ease-in-out infinite;
+            color: #2a2a2a;
             line-height: 1.1;
             position: relative;
+            display: inline-block;
         }
 
-        .hero h1::after {
+        .hero h1::before {
             content: 'TimeLand';
             position: absolute;
             top: 0;
@@ -284,13 +280,35 @@
             background-clip: text;
             animation: shimmer 8s ease-in-out infinite;
             z-index: -1;
-            opacity: 0.7;
-            filter: blur(2px);
+            opacity: 0.3;
+        }
+
+        .hero-text-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            animation: glowPulse 4s ease-in-out infinite;
+            z-index: -2;
+            border-radius: 50px;
         }
 
         @keyframes shimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
         }
 
         .hero-description {
@@ -782,7 +800,14 @@
 
         .full-rules-container {
             display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .full-rules-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         .rules-category {
@@ -1305,7 +1330,9 @@
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>TimeLand</h1>
+                <div class="hero-text-container">
+                    <h1>TimeLand</h1>
+                </div>
                 <p class="hero-description">
                     Ванильный Minecraft сервер с уникальным сюжетом и дружелюбным сообществом. 
                     Погрузись в мир приключений, где каждая история уникальна, а дружба длится вечно.
@@ -1499,7 +1526,7 @@
                 </div>
 
                 <!-- General Issues -->
-                <div class="rules-category green fade-in" style="transition-delay: 0.1s;">
+                <div class="rules-category green fade-in">
                     <h3 class="category-title">
                         <span class="category-number">2</span>
                         Общие вопросы
@@ -1539,7 +1566,7 @@
                 </div>
 
                 <!-- Gameplay -->
-                <div class="rules-category purple fade-in" style="transition-delay: 0.2s;">
+                <div class="rules-category purple fade-in">
                     <h3 class="category-title">
                         <span class="category-number">3</span>
                         Игровой процесс
@@ -1597,7 +1624,7 @@
                 </div>
 
                 <!-- Economy -->
-                <div class="rules-category gold fade-in" style="transition-delay: 0.3s;">
+                <div class="rules-category gold fade-in">
                     <h3 class="category-title">
                         <span class="category-number">4</span>
                         Экономика
@@ -1622,7 +1649,7 @@
                 </div>
 
                 <!-- Lore and Story -->
-                <div class="rules-category pink fade-in" style="transition-delay: 0.4s;">
+                <div class="rules-category pink fade-in">
                     <h3 class="category-title">
                         <span class="category-number">5</span>
                         Лор и сюжет
@@ -1669,7 +1696,7 @@
                 </div>
 
                 <!-- Clans and Community -->
-                <div class="rules-category orange fade-in" style="transition-delay: 0.5s;">
+                <div class="rules-category orange fade-in">
                     <h3 class="category-title">
                         <span class="category-number">6</span>
                         Кланы и комьюнити
