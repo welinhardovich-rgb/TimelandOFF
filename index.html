@@ -1738,6 +1738,170 @@
     </footer>
 
     <script>
+        // ==================== EASTER EGGS ====================
+        
+        // Console easter egg for developers
+        console.log('%c⛏️ TimeLand Server ⛏️', 'font-size: 24px; font-weight: bold; color: #d4af37;');
+        console.log('%cТы нашёл секрет! 🎉', 'font-size: 16px; color: #10b981;');
+        console.log('%cПрисоединяйся к нам: timeland.litehosting.su', 'font-size: 14px; color: #06b6d4;');
+        console.log('%cДискорд: https://discord.gg/2cwh6qDW', 'font-size: 14px; color: #ec4899;');
+        
+        // Secret: Triple click on logo
+        let logoClicks = 0;
+        let logoClickTimer = null;
+        
+        document.querySelector('.logo').addEventListener('click', function() {
+            logoClicks++;
+            
+            clearTimeout(logoClickTimer);
+            logoClickTimer = setTimeout(() => {
+                logoClicks = 0;
+            }, 1000);
+            
+            if (logoClicks === 3) {
+                showSecretMessage('🎉 Ты нашёл пасхалку! Секретный код: TIMELAND2025 🎮');
+                logoClicks = 0;
+            }
+        });
+        
+        // Secret: Konami code (↑ ↑ ↓ ↓ ← → ← → b a)
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        let konamiIndex = 0;
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.code === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateRainbowMode();
+                    showSecretMessage('🌈 РАДУЖНЫЙ РЕЖИМ АКТИВИРОВАН! 🌈');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+        
+        // Rainbow mode easter egg
+        function activateRainbowMode() {
+            document.body.style.animation = 'rainbow 2s linear infinite';
+            
+            // Create rainbow style
+            const style = document.createElement('style');
+            style.id = 'rainbow-mode';
+            style.textContent = `
+                @keyframes rainbow {
+                    0% { filter: hue-rotate(0deg); }
+                    100% { filter: hue-rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Deactivate after 10 seconds
+            setTimeout(() => {
+                document.body.style.animation = '';
+                const rainbowStyle = document.getElementById('rainbow-mode');
+                if (rainbowStyle) rainbowStyle.remove();
+            }, 10000);
+        }
+        
+        // Secret message popup
+        function showSecretMessage(message) {
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+                color: white;
+                padding: 30px 50px;
+                border-radius: 20px;
+                font-size: 1.2rem;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 20px 60px rgba(168, 85, 247, 0.5);
+                animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                text-align: center;
+                backdrop-filter: blur(10px);
+            `;
+            popup.textContent = message;
+            document.body.appendChild(popup);
+            
+            setTimeout(() => {
+                popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                setTimeout(() => popup.remove(), 300);
+            }, 3000);
+        }
+        
+        // Add popup animations
+        const popupStyle = document.createElement('style');
+        popupStyle.textContent = `
+            @keyframes popIn {
+                from { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            }
+            @keyframes popOut {
+                from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                to { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(popupStyle);
+        
+        // Secret: Click 10 times on "Начать играть" button
+        let ctaClicks = 0;
+        let ctaClickTimer = null;
+        
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            ctaClicks++;
+            
+            clearTimeout(ctaClickTimer);
+            ctaClickTimer = setTimeout(() => {
+                ctaClicks = 0;
+            }, 2000);
+            
+            if (ctaClicks === 10) {
+                showSecretMessage('💎 Ты действительно хочешь играть! Настойчивость награждается! 💎');
+                // Add sparkles
+                createSparkles();
+                ctaClicks = 0;
+            }
+        });
+        
+        // Sparkle effect
+        function createSparkles() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        width: 10px;
+                        height: 10px;
+                        background: ${['#d4af37', '#a855f7', '#ec4899', '#06b6d4', '#10b981'][Math.floor(Math.random() * 5)]};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9999;
+                        animation: sparkleAnim 1s ease-out forwards;
+                        left: ${Math.random() * 100}vw;
+                        top: ${Math.random() * 100}vh;
+                    `;
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }, i * 50);
+            }
+        }
+        
+        // Add sparkle animation
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkleAnim {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                100% { transform: scale(2) rotate(180deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+        
+        // ==================== END EASTER EGGS ====================
+
         // Copy IP functionality
         function copyIP() {
             const ipText = document.getElementById('ip-text').textContent;
